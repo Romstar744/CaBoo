@@ -1,0 +1,148 @@
+/* Стилизация виджета новостей */
+.news-widget {
+    padding: 20px;
+     max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.news-widget h2 {
+    margin-bottom: 20px;
+     text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    color: white;
+}
+
+#news-container {
+    padding: 10px;
+    text-align: left;
+    background: transparent;
+    margin-bottom: 10px;
+     display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.news-item{
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+       position: relative;
+}
+.news-item:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.news-item h3 {
+    margin-top: 0;
+    color: #db34db;
+     text-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.news-item .news-details{
+    padding-left: 10px;
+     margin-top: 10px;
+}
+ .news-item .news-details li {
+        list-style: none;
+        padding-left: 15px;
+         text-shadow: 0 1px 1px rgba(0,0,0,.1);
+         position: relative;
+
+ }
+  .news-item .news-details li::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+       background-color: #db34db;
+        transform: translateY(-50%);
+  }
+
+  /* Футер */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0; /* Уменьшили верхний и нижний отступы */
+    text-align: center;
+}
+
+.container-footer {
+    display: flex;
+    flex-wrap: wrap; /* Разрешает элементы в строке занимать всю ширину */
+    justify-content: space-between; /* Разделяет элементы равномерно */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:  20px;
+}
+
+
+.social {
+    margin-bottom: 10px; /* Отступ между блоками */
+    text-align: center;
+}
+
+
+.social a {
+    margin: 0 10px;
+}
+
+.social img {
+    width: 30px; /* Или другой размер, если нужно */
+}
+
+.social i {
+    font-size: 30px;
+    margin: 0 10px;
+    color: #fff;
+    transition: color 0.3s;
+}
+.social i:hover {
+    color: #c346e9;
+}
+
+.footer-links {
+    flex: 1; /* Занимает оставшееся пространство */
+    margin-bottom: 10px;
+}
+
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /*  Выравнивание по центру */
+}
+
+
+.footer-links li {
+    margin: 0 10px;
+}
+
+.footer-links a.active {
+    text-decoration: none;
+    color: #eee;
+    transition: color 0.3s;
+}
+.footer-links a:hover {
+    color: #c346e9;
+}
+
+.footer-links a.later {
+    color:rgba(0, 0, 0, 0);
+    cursor: default;
+}
+
+li.caboo {
+    padding-left: 50px;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 10px; /* Отступ сверху*/
+}

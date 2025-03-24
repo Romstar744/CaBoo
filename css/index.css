@@ -1,0 +1,900 @@
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+
+.slider {
+    max-width: 960px;
+    margin: 0 auto;
+    
+    position: relative;
+    background-color: rgb(247, 247, 247, 0.9);
+    border-radius: 15px;
+}
+
+nav {
+    max-width: 960px;
+    margin: 0;
+    position: relative;
+}
+
+.slider-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.slider-nav li {
+    margin: 0 15px;
+}
+
+.slider-nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* Удалили стили для .slider-indicator */
+
+header nav a {
+    margin: 5px;
+    text-decoration: none;
+    color: #333;
+     transition: color 0.3s;
+}
+header nav a:hover{
+    color: #db34db;
+}
+
+header nav a.register-btn {
+    background-color: #db34db;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+header nav a.register-btn:hover {
+    background-color: #b929b2;
+}
+
+
+
+.hero .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero {
+    margin-bottom: 20px;
+}
+
+.info {
+    background-color: rgb(49, 49, 49);
+    padding: 100px 0px 200px 0px;
+}
+
+.hero-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.hero-text h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.2; /* Улучшение межстрочного расстояния */
+    color: #ffffff;
+}
+
+.hero-text .subtitle {
+    font-size: 1.2em;
+    line-height: 1.6; /* Улучшение межстрочного расстояния */
+    color: #eeeeee;
+    margin-bottom: 30px;
+    margin-top: 0px;
+}
+
+.buttons-container {
+    padding-top: 20px;
+}
+
+.primary-button {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.primary-button {
+    background-color: #ff29ff;
+    color: white;
+}
+
+.secondary-button {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #ffffff;
+     transition: color 0.3s;
+}
+.secondary-button:hover{
+    color: #dd3ead;
+}
+
+.primary-button:hover {
+    background-color: #b12c9b;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+
+}
+
+.hero-image img {
+     max-width: 73%;
+     height: auto;
+     display: block;
+     transition: transform 0.3s ease;
+     border-radius: 10px;
+}
+
+.hero-image:hover img {
+ transform: scale(1.05);
+}
+
+/* Общие стили (предыдущие + эффекты наведения) */
+.how-it-works {
+    padding: 14px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.how-it-works .container {
+    max-width: 1200px;
+    padding: 10px 0px 60px;
+}
+
+.how-it-works h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.step {
+    width: 30%;
+    padding: 20px;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, scale 0.3s ease-in-out; /* Добавили scale */
+}
+
+.step img {
+    max-width: 80px;
+    margin-bottom: 15px;
+}
+
+/* Стили для скрытия плашки */
+.step.card-hidden {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+/* Стили для показа плашки */
+.step.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Добавляем увеличение при наведении */
+.step:hover {
+  scale: 1.05;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Усиливаем тень */
+}
+
+.numb {
+    padding: 100px 0px 200px 0px;
+}
+
+  .statistics {
+    padding: 40px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .stats p {
+    color: white;
+  }
+  
+  .statistics .container {
+    max-width: 1200px;
+    padding: 20px;
+  }
+  
+  .statistics h2 {
+    margin-bottom: 40px;
+    color: #2c3e50;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .stat {
+      width: 30%;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 10px;
+      opacity: 1; /* Для анимации opacity */
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Добавляем transition */
+  }
+  
+  .stat .number {
+    display: block;
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff00dd;
+  }
+  
+  /* Стили для скрытия элемента */
+  .stat.card-hidden {
+    opacity: 0;
+    transform: translateY(-50px); /* Смещаем вверх */
+  }
+  
+  /* Стили для показа элемента */
+  .stat.card-visible {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+.testimonials {
+    padding: 83px 0;
+    text-align: center;
+}
+
+.testimonials .container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #bebebe;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.testimonial-slider {
+    display: flex;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+
+.testimonial {
+    flex: 0 0 100%;
+    padding: 20px;
+    scroll-snap-align: center;
+    box-sizing: border-box;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.testimonial.active {
+    opacity: 1;
+}
+
+.testimonial p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.testimonial cite {
+    font-style: italic;
+    color: #555;
+    display: block;
+    margin-top: 8px;
+    font-size: 0.9em;
+}
+
+.slider-prev, .slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(167, 167, 167, 0.2);
+    border: none;
+    border-radius: 25%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.3s ease;
+    user-select: none;
+    outline: none;
+}
+
+.slider-prev:hover, .slider-next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.slider-prev {
+    left: 10px;
+}
+
+.slider-next {
+    right: 10px;
+}
+
+.chavo{
+    padding: 100px 0px 200px 0px;
+    background-color: rgb(49, 49, 49);
+}
+
+.faq {
+    padding: 60px 0px 80px;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0px auto;
+    padding-bottom: 30px;
+    background: rgb(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+    transition: padding-bottom 0.3s ease;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-item.active {
+    padding-bottom: 10px;
+}
+
+.faq-question {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #f9f9f9;
+}
+
+.faq-question p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.arrow {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active .arrow {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 15px 15px;
+    overflow: hidden;
+    max-height: 0; /* Начальная высота 0, скрываем p */
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.faq-answer p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.faq-answer.show {
+    max-height: 500px; /* устанавливаем максимальную высоту (можно подобрать) */
+    opacity: 1;
+}
+
+.manage {
+    padding: 100px 0px 200px 0px;
+}
+
+.rec-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Стили для контейнеров */
+.rec-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Стили для карточек */
+.rec-card {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    background-color: rgb(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Начальное состояние - прозрачная */
+    transform: translateY(20px); /* Начальное состояние - смещена вниз */
+}
+
+.rec-card.card-visible {
+     opacity: 1;
+     transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
+.rec-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.rec-card::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    top: 0;
+    background: linear-gradient(to right, #b605ad, #c450ab);
+    transition: height 0.3s ease;
+}
+
+.rec-card:hover::before {
+    height: 100%;
+}
+
+.rec-card h3 {
+    margin: 10px 0;
+    position: relative;
+    z-index: 1;
+    font-size: 1.2rem;
+}
+
+.rec-card p {
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    position: relative;
+    z-index: 1;
+    font-size: 0.9rem;
+    margin: 0;
+    transition: opacity 0.3s ease;
+}
+
+.rec-card:hover p {
+    opacity: 1;
+}
+
+.rec-card i {
+    font-size: 3em;
+    color: #db34db;
+    display: block;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+.rec-card:hover i {
+    color: #333;
+}
+
+/* Стили для хедера */
+.rec-header {
+    background-color: #f0f0f0;
+    padding: 40px;
+    text-align: center;
+}
+
+.rec-header p {
+    margin-bottom: 20px;
+}
+
+.rec-hero-counter {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Секция "Как это работает?" */
+.rec-how-it-works .rec-steps-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+/* Секция "Наши возможности" */
+.rec-features {
+    padding: 20px;
+}
+
+.rec-container h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.rec-features .rec-feature-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* Секция "Достижения" */
+.rec-achievements .rec-achievement-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.rec-achievements .rec-achievement {
+    text-align: center;
+    margin: 20px;
+}
+
+.rec-achievements .rec-count {
+    font-size: 2.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+
+header h1{
+    text-shadow: 0 2px 4px rgba(0,0,0,.3);
+}
+header p{
+    text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+
+main.team-container {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.team-member {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    margin: 1rem;
+    display: flex;
+    padding: 20px;
+    max-width: 800px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.team-member:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.member-image-gallery {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    position: relative;
+    min-height: 200px;
+}
+
+
+.image-slider {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+}
+
+.image-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+.image-track img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display:block;
+    max-height: 250px;
+}
+
+.image-buttons {
+  position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    z-index: 10;
+}
+
+.slider-button {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.slider-button:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.member-info {
+    flex: 2;
+    padding-left: 20px;
+     min-height: 100px;
+}
+
+.member-info h3 {
+    margin-top: 0;
+    color: #3498db;
+    text-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+.member-role {
+    color: #777;
+    font-style: italic;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+.member-quote-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 70px;
+    margin-bottom:10px;
+}
+
+.member-quote {
+    font-style: italic;
+    border-left: 3px solid #3498db;
+    padding-left: 10px;
+    margin: 0;
+    opacity: 0;
+    position:absolute;
+     top: 100%;
+    left: 0;
+    transition: top .3s ease, opacity .2s ease;
+}
+
+.member-quote-wrapper:hover .member-quote {
+  top: 0;
+   opacity: 1;
+}
+
+.progress-container {
+  margin-bottom: 15px;
+}
+.member-dev-label {
+    margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+   height: 100%;
+    background-color: #3498db;
+    transition: width 0.8s ease-in-out;
+}
+.member-dev {
+    color: #555;
+     margin-top: 5px;
+     font-style: italic;
+      text-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.social {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.social a {
+    margin: 0 10px;
+}
+
+.social img {
+    width: 30px;
+}
+
+.social i {
+    font-size: 30px;
+    margin: 0 10px;
+    color: #fff;
+    transition: color 0.3s;
+}
+.social i:hover {
+    color: #c346e9;
+}
+.footer-links {
+    flex: 1;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer-links li {
+    margin: 0 10px;
+}
+
+.footer-links a.active {
+    text-decoration: none;
+    color: #eee;
+    transition: color 0.3s;
+}
+.footer-links a:hover {
+    color: #c346e9;
+}
+
+li.caboo {
+    padding-left: 50px;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/*АДАПТАЦИЯ*/
+
+@media (max-width: 1400px) {
+    .manage {
+        padding: 0px 0px 60px 0px !important;
+    }
+    .chavo {
+        background-color: rgb(49, 49, 49) !important;
+        padding: 0px 0px 60px 0px !important;
+    }
+    .numb {
+        padding: 0px 0px 60px 0px !important;
+    }
+    .info {
+        background-color: rgb(49, 49, 49) !important;
+        padding: 0px 0px 60px 0px !important; /* Исправлено значение padding */
+    }
+}
+

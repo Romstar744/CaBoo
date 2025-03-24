@@ -1,0 +1,35 @@
+.messagebox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Важно, чтобы модальное окно было поверх всего */
+    border: 2px solid #6366f1; /* Фиолетовая рамка */
+    max-width: 500px;
+    width: 90%;
+}
+
+.messagebox.hidden {
+    display: none;
+}
+
+.messagebox-content p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #334155;
+    text-align: center;
+}
+
+.messagebox button {
+    background-color: #6366f1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}

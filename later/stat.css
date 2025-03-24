@@ -1,0 +1,57 @@
+.info-blocks-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 160px;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  .info-block {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      margin: 1rem;
+      padding: 20px;
+      flex: 1;
+      min-width: 250px;
+      max-width: 400px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(-20px); /* Начальное положение - выше */
+      transition: opacity 0.6s ease, transform 0.6s ease; /* анимация при появлении*/
+  }
+  .info-block.card-visible {
+     opacity: 1;
+     transform: translateY(0);
+  }
+  
+  .info-block:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Анимация hover */
+  }
+  
+  .info-block h3 {
+      margin-top: 0;
+      color: #db34db;
+      text-shadow: 0 1px 2px rgba(0,0,0,.2);
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+  }
+  
+  .info-block h3 i {
+      margin-right: 5px;
+      font-size: 1.1em;
+  }
+  
+  .info-block p {
+      margin: 0;
+      text-shadow: 0 1px 1px rgba(0,0,0,.1);
+  }
+  
+  .info-block .stat-value {
+      font-weight: bold;
+  }
+  

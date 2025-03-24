@@ -1,0 +1,208 @@
+/* Общие стили */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc; /* Более светлый фон */
+    color: #343a40; /* Темный цвет текста для лучшей читаемости */
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px; /* Отступы для мобильных устройств */
+    box-sizing: border-box;
+}
+
+.profile-form {
+    max-width: 900px; /* Увеличенная ширина */
+    width: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Более выраженная тень */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out; /* Более мягкое появление */
+}
+
+.profile-form:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.profile-form h1 {
+    text-align: center;
+    padding: 30px;
+    background-color: #4c6ef5; /* Яркий цвет для заголовка */
+    color: #fff;
+    font-size: 2.2em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Аватар */
+.profile-avatar {
+    text-align: center;
+}
+
+.profile-avatar img.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff; /* Белая рамка для аватара */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.profile-avatar img.avatar:hover {
+    transform: scale(1.1);
+}
+
+/* Информация */
+.profile-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Адаптивные колонки */
+    gap: 25px;
+    padding: 30px;
+}
+
+.info-block {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 25px;
+}
+
+.info-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.info-block h2 {
+    color: #343a40;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
+.form-row label {
+    color: #495057;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-right: 15px;
+    flex: 0 0 140px;
+    text-align: right;
+}
+
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #495057;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    flex: 1;
+    resize: vertical;
+}
+
+.form-row input[readonly],
+.form-row textarea[readonly] {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Кнопки */
+.profile-form a.btn,
+.profile-form a.back-link { /* Добавлены стили для back-link */
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px;
+    background-color: #3b5bdb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-form a.btn:hover,
+.profile-form a.back-link:hover { /* Добавлены стили для back-link */
+    background-color: #30419b;
+    transform: translateY(-2px);
+}
+
+.profile-form a.back-link {
+    background-color: #6c757d;
+}
+
+.profile-form a.back-link:hover {
+    background-color: #5a6268;
+}
+
+/* Предупреждения */
+.warning {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .profile-info {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-row label {
+        margin-bottom: 8px;
+        margin-right: 0;
+        flex: unset;
+        text-align: left;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="email"],
+    .form-row textarea {
+        padding: 10px;
+    }
+}
+
+
+
