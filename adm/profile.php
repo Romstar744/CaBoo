@@ -92,20 +92,35 @@ $conn->close();
                 <h2>Предпросмотр резюме</h2>
                 <div class="resume-preview">
                     <?php
-                    $resumePath = $user['resume'];
+                    $relativePath = $user['resume']; // Относительный путь из базы данных
+
+                    // **ВАЖНО: Замените это на реальный способ получения базового URL вашего сайта:**
+                    $baseUrl = 'https://starostin.xn--80ahdri7a.site/CaBoo/';
+
+                    // Преобразование относительного пути в полный URL:
+                    // Проверка, чтобы избежать двойных слешей
+                    if (substr($baseUrl, -1) == '/' && substr($relativePath, 0, 2) == '../') {
+                        $resumePath = $baseUrl . substr($relativePath, 3);
+                    } elseif (substr($baseUrl, -1) == '/' && substr($relativePath, 0, 1) == '/') {
+                        $resumePath = $baseUrl . substr($relativePath, 1);
+                    } elseif (substr($baseUrl, -1) != '/' && substr($relativePath, 0, 1) != '/') {
+                        $resumePath = $baseUrl . '/' . $relativePath;
+                    } else {
+                        $resumePath = $baseUrl . $relativePath;
+                    }
+
+                    $resumePath = str_replace('../', '', $resumePath);
+
                     if ($resumePath) {
-                        // Определяем расширение файла
+                        // Определяем расширение файла (очень упрощенно)
                         $fileExtension = strtolower(pathinfo($resumePath, PATHINFO_EXTENSION));
 
                         // Отображаем резюме в зависимости от типа файла
                         if ($fileExtension == 'pdf') {
                             echo '<embed src="' . htmlspecialchars($resumePath) . '" type="application/pdf" width="100%" height="600">';
                         } elseif ($fileExtension == 'docx' || $fileExtension == 'doc') {
-                            // Google Docs Viewer (требует, чтобы файл был доступен по URL)
+                            // Google Docs Viewer
                             echo '<iframe src="https://docs.google.com/viewer?url=' . urlencode($resumePath) . '&embedded=true" width="100%" height="600"></iframe>';
-                        } elseif ($fileExtension == 'txt') {
-                            $content = file_get_contents($resumePath);
-                            echo '<pre>' . htmlspecialchars($content) . '</pre>';
                         } else {
                             echo '<p>Неподдерживаемый формат файла.</p>';
                         }
@@ -115,7 +130,7 @@ $conn->close();
                     ?>
                 </div>
                 <?php endif; ?>
-                </section>
+            </section>
             </section>
 
             <?php if ($user['role'] == 'seeker'): ?>
