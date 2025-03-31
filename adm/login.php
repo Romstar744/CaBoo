@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="background"></div>
 <div class="container">
     <form class="auth-form login-form" action="login_handler.php" method="post">
         <h1>Авторизация</h1>
         <?php
         if (isset($_GET['success'])) {
             $successMessage = htmlspecialchars($_GET['success']);
-            echo '<div style="color: green; text-align: center; margin-bottom: 10px;">' . $successMessage . '</div>';
+            echo '<div class="info-message">' . $successMessage . '</div>';
         }
         if (isset($_GET['message'])) {
             $message = htmlspecialchars($_GET['message']);

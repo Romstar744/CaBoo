@@ -1,0 +1,219 @@
+/* Общие стили */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f2f2f7; /* Очень светлый серый */
+    color: #4a4a4a; /* Темно-серый текст */
+    line-height: 1.7;
+    margin: 0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #e0e0e0, #ffffff); /* Светлый градиент */
+}
+
+.auth-form {
+    max-width: 550px; /* Чуть шире */
+    width: 100%;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    animation: fadeIn 0.8s ease-in-out;
+    padding: 45px; /* Больше отступы */
+}
+
+.auth-form:hover {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.13);
+    transform: scale(1.01);
+}
+
+.auth-form h1 {
+    text-align: center;
+    padding: 35px;
+    background: linear-gradient(45deg, #8e24aa, #c5cae9); /* Фиолетовый градиент */
+    color: #fff;
+    font-size: 2.5em;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    animation: slideInDown 0.8s ease-in-out;
+    font-weight: 700;
+    margin-bottom: 40px; /* Больше отступ */
+}
+
+.form-group {
+    margin-bottom: 35px; /* Больше отступ */
+    animation: slideInLeft 0.6s ease-in-out;
+}
+
+.form-group label {
+    color: #616161; /* Средне-серый цвет */
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 18px; /* Больше отступ */
+    border: 2px solid #bdbdbd; /* Светло-серый цвет */
+    border-radius: 12px;
+    font-size: 1.1em;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: #9c27b0; /* Насыщенный фиолетовый */
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+    outline: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 17px 37px; /* Больше отступ */
+    margin: 15px;
+    background: linear-gradient(45deg, #9c27b0, #ba68c8); /* Фиолетовый градиент */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.3em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc); /* Более темный фиолетовый */
+    transform: translateY(-4px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #757575, #9e9e9e); /* Серый градиент */
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(45deg, #616161, #8a8a8a);
+}
+
+.login-link {
+    display: block;
+    text-align: center;
+    margin-top: 30px; /* Больше отступ */
+    color: #9c27b0;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.login-link:hover {
+    color: #7b1fa2; /* Более темный фиолетовый */
+}
+
+.error-message {
+    color: #d32f2f; /* Темно-красный */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    animation: shake 0.5s ease-in-out;
+}
+
+.info-message {
+    color: #7e57c2; /* Светлый фиолетовый */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .auth-form {
+        padding: 35px;
+    }
+
+    .auth-form h1 {
+        font-size: 2.2em;
+        padding: 30px;
+    }
+
+    .form-group label {
+        font-size: 1.1em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+        padding: 16px;
+    }
+
+    .btn {
+        padding: 15px 33px;
+        font-size: 1.2em;
+    }
+}

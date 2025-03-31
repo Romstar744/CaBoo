@@ -78,19 +78,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция для отображения/скрытия полей в зависимости от выбранной роли
     function toggleFields() {
         if (roleSeekerRadio.checked) {
-            seekerFields.classList.remove('hidden');
-            employerFields.classList.add('hidden');
+            seekerFields.classList.add('active');
+            employerFields.classList.remove('active');
         } else if (roleEmployerRadio.checked) {
-            seekerFields.classList.add('hidden');
-            employerFields.classList.remove('hidden');
+            seekerFields.classList.remove('active');
+            employerFields.classList.add('active');
         }
     }
 
     // Вызываем функцию toggleFields при загрузке страницы и при изменении выбранной роли
     toggleFields();
- // Добавляем обработчики событий для radio button с ролью
- roleSeekerRadio.addEventListener('change', toggleFields);
- roleEmployerRadio.addEventListener('change', toggleFields);
+    roleSeekerRadio.addEventListener('change', toggleFields);
+    roleEmployerRadio.addEventListener('change', toggleFields);
 
  // Устанавливаем значения по умолчанию для полей с датами
  const birthdateInput = document.getElementById('birthdate');

@@ -1,9 +1,12 @@
 /* Общие стили */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f7f9fc; /* Более светлый фон */
-    color: #343a40; /* Темный цвет текста для лучшей читаемости */
-    line-height: 1.6;
+    font-family: 'Nunito', sans-serif;
+    background-color: #f2f2f7;
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin: 0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -11,100 +14,111 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px; /* Отступы для мобильных устройств */
+    padding: 30px;
     box-sizing: border-box;
+    background: linear-gradient(135deg, #e0e0e0, #ffffff);
 }
 
 .profile-form {
-    max-width: 900px; /* Увеличенная ширина */
+    max-width: 1200px;
     width: 100%;
     background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Более выраженная тень */
+    border-radius: 25px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: box-shadow 0.3s ease;
-    animation: fadeIn 0.5s ease-in-out; /* Более мягкое появление */
-}
-
-.profile-form:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s ease-in-out;
+    padding: 45px; /* Отступы, как на странице авторизации */
 }
 
 .profile-form h1 {
     text-align: center;
-    padding: 30px;
-    background-color: #4c6ef5; /* Яркий цвет для заголовка */
+    padding: 35px;
+    background: linear-gradient(45deg, #8e24aa, #c5cae9);
     color: #fff;
-    font-size: 2.2em;
-    letter-spacing: 1px;
+    font-size: 2.5em;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    animation: slideInDown 0.8s ease-in-out;
+    font-weight: 700;
+    margin-bottom: 40px; /* Отступы, как на странице авторизации */
 }
 
 /* Аватар */
 .profile-avatar {
     text-align: center;
+    margin-top: -80px;
+    position: relative;
+    z-index: 1;
 }
 
 .profile-avatar img.avatar {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #fff; /* Белая рамка для аватара */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    border: 7px solid #fff;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: zoomIn 0.6s ease-in-out;
 }
 
 .profile-avatar img.avatar:hover {
     transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Информация */
 .profile-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Адаптивные колонки */
-    gap: 25px;
-    padding: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+    gap: 35px;
+    padding: 45px; /* Отступы, как на странице авторизации */
 }
 
 .info-block {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f8f8ff;
+    border-radius: 20px;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 25px;
+    padding: 35px;
+    animation: fadeInUp 0.9s ease-in-out;
 }
 
 .info-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
 }
 
 .info-block h2 {
-    color: #343a40;
-    font-size: 1.6em;
-    margin-bottom: 20px;
+    color: #7b1fa2;
+    font-size: 2em;
+    margin-bottom: 30px;
     text-align: center;
-    border-bottom: 2px solid #e9ecef;
-    padding-bottom: 10px;
+    border-bottom: 4px solid #e0e0e0;
+    padding-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 35px; /* Отступы, как на странице авторизации */
+    animation: slideInLeft 0.6s ease-in-out;
 }
 
 .form-row {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .form-row label {
-    color: #495057;
-    font-size: 1.1em;
+    color: #616161;
+    font-size: 1.2em;
     font-weight: 600;
-    margin-right: 15px;
-    flex: 0 0 140px;
+    margin-right: 25px;
+    flex: 0 0 200px;
     text-align: right;
 }
 
@@ -112,69 +126,126 @@ body {
 .form-row input[type="email"],
 .form-row textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    font-size: 1em;
-    color: #495057;
+    padding: 17px;
+    border: 2px solid #bdbdbd;
+    border-radius: 12px;
+    font-size: 1.1em;
+    color: #4a4a4a;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     flex: 1;
     resize: vertical;
+    background-color: #fff;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+}
+
+.form-row input[type="text"]:focus,
+.form-row input[type="email"]:focus,
+.form-row textarea:focus {
+    border-color: #9c27b0;
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+    outline: none;
 }
 
 .form-row input[readonly],
+.form-row input[type="email"][readonly],
 .form-row textarea[readonly] {
-    background-color: #f8f9fa;
-    color: #6c757d;
+    background-color: #e0e0e0;
+    color: #757575;
     cursor: not-allowed;
 }
 
 /* Кнопки */
 .profile-form a.btn,
-.profile-form a.back-link { /* Добавлены стили для back-link */
+.profile-form a.back-link {
     display: inline-block;
-    padding: 12px 25px;
-    margin: 10px;
-    background-color: #3b5bdb;
+    padding: 17px 37px; /* Как на странице авторизации */
+    margin: 15px;
+    background: linear-gradient(45deg, #9c27b0, #ba68c8);
     color: #fff;
     text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    font-size: 1.3em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .profile-form a.btn:hover,
-.profile-form a.back-link:hover { /* Добавлены стили для back-link */
-    background-color: #30419b;
-    transform: translateY(-2px);
+.profile-form a.back-link:hover {
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+    transform: translateY(-4px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
 }
 
 .profile-form a.back-link {
-    background-color: #6c757d;
+    background: linear-gradient(45deg, #757575, #9e9e9e);
 }
 
 .profile-form a.back-link:hover {
-    background-color: #5a6268;
+    background: linear-gradient(45deg, #616161, #8a8a8a);
 }
 
 /* Предупреждения */
 .warning {
-    color: #dc3545;
-    font-weight: 500;
+    color: #d32f2f;
+    font-weight: 700;
 }
 
 /* Анимации */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0.7;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
@@ -182,7 +253,7 @@ body {
 @media (max-width: 768px) {
     .profile-info {
         grid-template-columns: 1fr;
-        padding: 20px;
+        padding: 30px;
     }
 
     .form-row {
@@ -191,7 +262,7 @@ body {
     }
 
     .form-row label {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         margin-right: 0;
         flex: unset;
         text-align: left;
@@ -200,9 +271,16 @@ body {
     .form-row input[type="text"],
     .form-row input[type="email"],
     .form-row textarea {
-        padding: 10px;
+        padding: 16px;
+    }
+
+    .profile-form h1 {
+        font-size: 2.3em;
+        padding: 35px;
+    }
+
+    .profile-avatar img.avatar {
+        width: 140px;
+        height: 140px;
     }
 }
-
-
-
