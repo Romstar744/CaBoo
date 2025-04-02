@@ -43,5 +43,6 @@
         <a href="register.php" class="login-link">Нет аккаунта?</a>
     </form>
 </div>
+<script src="../js/login.js"></script>
 </body>
 </html>

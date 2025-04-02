@@ -1,8 +1,8 @@
 /* Общие стили */
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #f2f2f7; /* Очень светлый серый */
-    color: #4a4a4a; /* Темно-серый текст */
+    background-color: #f7f9fc; /* Очень светлый лавандовый */
+    color: #555555; /* Мягкий темно-серый текст */
     line-height: 1.7;
     margin: 0;
     overflow-x: hidden;
@@ -16,7 +16,23 @@ body {
     min-height: 100vh;
     padding: 30px;
     box-sizing: border-box;
-    background: linear-gradient(135deg, #e0e0e0, #ffffff); /* Светлый градиент */
+    background: linear-gradient(45deg, #a8b8db, #b8c6db, #c6b8db, #dbb8c6); /* Пастельный градиент */
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    position: relative; /* Для позиционирования плавающих элементов */
+    overflow: hidden; /* Чтобы призраки не вылезали за контейнер */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .auth-form {
@@ -24,22 +40,24 @@ body {
     width: 100%;
     background-color: #fff;
     border-radius: 25px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08); /* Легкая тень */
     overflow: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     animation: fadeIn 0.8s ease-in-out;
     padding: 45px; /* Больше отступы */
+    position: relative; /* Для z-index плавающих элементов */
+    z-index: 1; /* Чтобы форма была над призраками */
 }
 
 .auth-form:hover {
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
     transform: scale(1.01);
 }
 
 .auth-form h1 {
     text-align: center;
     padding: 35px;
-    background: linear-gradient(45deg, #8e24aa, #c5cae9); /* Фиолетовый градиент */
+    background: linear-gradient(45deg, #7986cb, #9fa8da); /* Приглушенный фиолетовый градиент */
     color: #fff;
     font-size: 2.5em;
     letter-spacing: 1.2px;
@@ -48,6 +66,17 @@ body {
     animation: slideInDown 0.8s ease-in-out;
     font-weight: 700;
     margin-bottom: 40px; /* Больше отступ */
+    animation: glow 3s ease-in-out infinite alternate; /* Анимация свечения */
+    text-shadow: 0 0 15px rgba(121, 134, 203, 0.7); /* Мягкое свечение */
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 15px rgba(121, 134, 203, 0.7);
+    }
+    to {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(121, 134, 203, 0.5);
+    }
 }
 
 .form-group {
@@ -56,7 +85,7 @@ body {
 }
 
 .form-group label {
-    color: #616161; /* Средне-серый цвет */
+    color: #777777; /* Светло-серый цвет */
     font-size: 1.2em;
     font-weight: 600;
     margin-bottom: 12px;
@@ -67,20 +96,20 @@ body {
 .form-group input[type="password"] {
     width: 100%;
     padding: 18px; /* Больше отступ */
-    border: 2px solid #bdbdbd; /* Светло-серый цвет */
+    border: 2px solid #d6dce2; /* Очень светло-серый цвет */
     border-radius: 12px;
     font-size: 1.1em;
-    color: #4a4a4a;
+    color: #555555;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+    background-color: #f9f9fb; /* Очень светлый серый */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.05);
 }
 
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus {
-    border-color: #9c27b0; /* Насыщенный фиолетовый */
-    box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+    border-color: #7986cb; /* Приглушенный фиолетовый */
+    box-shadow: 0 0 8px rgba(121, 134, 203, 0.3);
     outline: none;
 }
 
@@ -88,13 +117,13 @@ body {
     display: inline-block;
     padding: 17px 37px; /* Больше отступ */
     margin: 15px;
-    background: linear-gradient(45deg, #9c27b0, #ba68c8); /* Фиолетовый градиент */
+    background: linear-gradient(45deg, #7986cb, #9fa8da); /* Приглушенный фиолетовый градиент */
     color: #fff;
     text-decoration: none;
     border-radius: 12px;
     font-size: 1.3em;
     transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-weight: 600;
     letter-spacing: 0.5px;
     border: none;
@@ -102,35 +131,35 @@ body {
 }
 
 .btn:hover {
-    background: linear-gradient(45deg, #7b1fa2, #ab47bc); /* Более темный фиолетовый */
-    transform: translateY(-4px);
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(45deg, #5c6bc0, #7986cb); /* Более темный фиолетовый */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Умеренная тень */
 }
 
 .btn-secondary {
-    background: linear-gradient(45deg, #757575, #9e9e9e); /* Серый градиент */
+    background: linear-gradient(45deg, #90a4ae, #b0bec5); /* Серый градиент */
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(45deg, #616161, #8a8a8a);
+    background: linear-gradient(45deg, #78909c, #90a4ae);
 }
 
 .login-link {
     display: block;
     text-align: center;
     margin-top: 30px; /* Больше отступ */
-    color: #9c27b0;
+    color: #7986cb;
     text-decoration: none;
     font-size: 1.1em;
     transition: color 0.3s ease;
 }
 
 .login-link:hover {
-    color: #7b1fa2; /* Более темный фиолетовый */
+    color: #5c6bc0; /* Более темный фиолетовый */
 }
 
 .error-message {
-    color: #d32f2f; /* Темно-красный */
+    color: #e57373; /* Мягкий красный */
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.1em;
@@ -139,7 +168,7 @@ body {
 }
 
 .info-message {
-    color: #7e57c2; /* Светлый фиолетовый */
+    color: #7986cb; /* Приглушенный фиолетовый */
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.1em;
@@ -189,6 +218,32 @@ body {
     }
     20%, 40%, 60%, 80% {
         transform: translateX(10px);
+    }
+}
+
+/* Floating Ghosts */
+.floating-ghost {
+    position: absolute;
+    width: 50px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 60" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M25 0C11.1929 0 0 11.1929 0 25V55C0 57.7614 2.23858 60 5 60H45C47.7614 60 50 57.7614 50 55V25C50 11.1929 38.8071 0 25 0ZM10 35C7.23858 35 5 32.7614 5 30C5 27.2386 7.23858 25 10 25C12.7614 25 15 27.2386 15 30C15 32.7614 12.7614 35 10 35ZM40 35C37.2386 35 35 32.7614 35 30C35 27.2386 37.2386 25 40 25C42.7614 25 45 27.2386 45 30C45 32.7614 42.7614 35 40 35ZM7.5 45H17.5C17.5 41.3139 14.5694 38.3833 10.8833 38.3833C7.19717 38.3833 4.26667 41.3139 4.26667 45H7.5ZM32.5 45H42.5C42.5 41.3139 39.5694 38.3833 35.8833 38.3833C32.1972 38.3833 29.2667 41.3139 29.2667 45H32.5Z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+    position: absolute; /*  Важно для правильного позиционирования */
+    animation: floatGhostAcross 20s linear infinite;
+}
+
+@keyframes floatGhostAcross {
+    0% {
+        left: -10%; /* Начинаем за пределами экрана слева */
+        transform: translateY(0);
+    }
+    100% {
+        left: 110%; /*  Заканчиваем за пределами экрана справа */
+        transform: translateY(0);
     }
 }
 
