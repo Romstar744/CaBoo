@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 24, 2025 at 07:28 PM
+-- Generation Time: Apr 10, 2025 at 09:09 PM
 -- Server version: 10.11.10-MariaDB-ubu2204
 -- PHP Version: 8.2.27
 
@@ -61,6 +61,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `registration_date`, `email_verification_token`, `is_email_verified`, `role`, `first_name`, `last_name`, `city`, `company_name`, `company_description`, `avatar`, `company_logo`, `about`, `skills`, `desired_salary`, `birthdate`, `social_links`, `experience`, `education`, `resume`, `gender`, `industry`, `educationInstitution`, `educationDegree`, `educationStart`, `educationEnd`, `educationDescription`) VALUES
+(110, '111', '$2y$10$EppCkItIA8hGHrAPYKkEjubFqWeZnIda/kd8eyc3XNgdQ7Z12olLy', 'romstar742@gmail.com', '2025-03-28 12:28:51', NULL, 1, 'seeker', 'Роман', 'Старостин', 'Moscow', NULL, NULL, '../img/avatars/67e69602db573_1.jpg', NULL, 'dthd', 'знаю C#', 1000000, '2024-06-03', 'tg: LIL_SPAL', NULL, NULL, '../resumes/67e69602da5a1_ЗаданиеПП.02_ПодготовкаДЭ_2025.pdf', 'male', NULL, 'ПКГХ', 'спо', '2000-01', '2004-01', 'укук'),
+(116, 'dan24_00', '$2y$10$0uSSWMet369P7pfWg8U2Eue4qbHBeGhSHB7KmhMjFtxd.GQ6ikjKa', 'dan24_00@mail.ru', '2025-04-09 14:44:09', '0496eb8ab6f5389d0cd2060578da294b9c98ce314b0c6180478e9dc46b69709a', 0, 'seeker', 'Даниил', 'Иванов', 'г Чебоксары', NULL, NULL, NULL, NULL, '///', '///', 0, '2007-12-24', '///', NULL, NULL, NULL, 'male', NULL, 'МАОУ Лицей №3', 'спо', '2014-09', '2026-05', '...'),
+(123, '222', '$2y$10$.QG0W1Vaoq.qvK2r6rboQOGxhYYawz/YWg/aiazfn/wg1CQA8ia2W', 'romstar744@gmail.com', '2025-04-10 20:56:25', NULL, 1, 'employer', NULL, NULL, NULL, 'аыува', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 'ацуа', NULL, NULL, NULL, NULL, NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -80,7 +89,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
