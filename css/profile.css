@@ -124,7 +124,11 @@ body {
 
 .form-row input[type="text"],
 .form-row input[type="email"],
-.form-row textarea {
+.form-row input[type="date"],
+.form-row input[type="number"],
+.form-row input[type="month"],
+.form-row textarea,
+.form-row select {
     width: 100%;
     padding: 17px;
     border: 2px solid #bdbdbd;
@@ -141,7 +145,11 @@ body {
 
 .form-row input[type="text"]:focus,
 .form-row input[type="email"]:focus,
-.form-row textarea:focus {
+.form-row input[type="date"]:focus,
+.form-row input[type="number"]:focus,
+.form-row input[type="month"]:focus,
+.form-row textarea:focus,
+.form-row select:focus {
     border-color: #9c27b0;
     box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
     outline: none;
@@ -156,6 +164,7 @@ body {
 }
 
 /* Кнопки */
+.profile-form button.btn,
 .profile-form a.btn,
 .profile-form a.back-link {
     display: inline-block;
@@ -170,8 +179,11 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     font-weight: 600;
     letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
 }
 
+.profile-form button.btn:hover,
 .profile-form a.btn:hover,
 .profile-form a.back-link:hover {
     background: linear-gradient(45deg, #7b1fa2, #ab47bc);
@@ -270,7 +282,11 @@ body {
 
     .form-row input[type="text"],
     .form-row input[type="email"],
-    .form-row textarea {
+    .form-row input[type="date"],
+    .form-row input[type="number"],
+    .form-row input[type="month"],
+    .form-row textarea,
+    .form-row select {
         padding: 16px;
     }
 

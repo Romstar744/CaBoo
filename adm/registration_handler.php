@@ -1,4 +1,3 @@
-
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -35,71 +34,6 @@ $username = validate($_POST["username"]);
 $email = validate($_POST["email"]);
 $password = $_POST["password"]; // Не валидируем пароль здесь, сделаем это позже
 $role = $_POST["role"];
-
-// Обработка данных соискателя или работодателя
-$firstName = $lastName = $city = $companyName = $companyDescription = $about = $skills = $desiredSalary = $birthdate = $socialLinks = $resume = $gender = $industry = $educationInstitution = $educationDegree = $educationStart = $educationEnd = $educationDescription = null;
-
-if ($role === 'seeker') {
-    $firstName = validate($_POST["firstName"]);
-    $lastName = validate($_POST["lastName"]);
-    $city = validate($_POST["city"]);
-    $about = validate($_POST["about"]);
-    $skills = validate($_POST["skills"]);
-    $desiredSalary = validate($_POST["desired_salary"]);
-    $birthdate = validate($_POST["birthdate"]);
-    $socialLinks = validate($_POST["social_links"]);
-    $gender = validate($_POST["gender"]);
-    $educationInstitution = validate($_POST["educationInstitution"]);
-    $educationDegree = validate($_POST["educationDegree"]);
-    $educationStart = validate($_POST["educationStart"]);
-    $educationEnd = validate($_POST["educationEnd"]);
-    $educationDescription = validate($_POST["educationDescription"]);
-
-    // Обработка загрузки резюме
-    if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
-        $resumePath = uploadFile($_FILES['resume'], '../resumes/');
-    }
-
-} elseif ($role === 'employer') {
-    $companyName = validate($_POST["companyName"]);
-    $companyDescription = validate($_POST["companyDescription"]);
-    $industry = validate($_POST["industry"]);
-}
-
-// Загрузка и обработка аватара и логотипа
-$avatarPath = null;
-$companyLogoPath = null;
-
-// Загрузка аватара (если выбран файл)
-if ($role === 'seeker' && isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-    $avatarPath = uploadFile($_FILES['avatar'], '../img/avatars/');
-}
-
-// Загрузка логотипа (если выбран файл)
-if ($role === 'employer' && isset($_FILES['companyLogo']) && $_FILES['companyLogo']['error'] === UPLOAD_ERR_OK) {
-    $companyLogoPath = uploadFile($_FILES['companyLogo'], '../img/company_logos/');
-}
-
-// Функция для загрузки файла
-function uploadFile($file, $destination) {
-    $uploadDir = $destination;
-    $fileName = basename($file["name"]);
-    $filePath = $uploadDir . uniqid() . "_" . $fileName;
-    $imageFileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-
-    // Проверка типа файла
-    $allowedExtensions = array("jpg", "jpeg", "png", "gif", "pdf", "doc", "docx");
-    if (!in_array($imageFileType, $allowedExtensions)) {
-        return null; // Неверный тип файла
-    }
-
-    // Перемещение файла
-    if (move_uploaded_file($file["tmp_name"], $filePath)) {
-        return $filePath;
-    } else {
-        return null; // Ошибка при загрузке файла
-    }
-}
 
 // Валидация данных
 $errors = [];
@@ -141,9 +75,9 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 $token = generate_token();
 
 // SQL-запрос для добавления нового пользователя
-$sql = "INSERT INTO users (username, email, password, email_verification_token, is_email_verified, role, first_name, last_name, city, company_name, company_description, avatar, company_logo, about, skills, desired_salary, birthdate, social_links, resume, gender, industry, educationInstitution, educationDegree, educationStart, educationEnd, educationDescription) VALUES (?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO users (username, email, password, email_verification_token, is_email_verified, role) VALUES (?, ?, ?, ?, 0, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssssssssssssssssssssss", $username, $email, $hashedPassword, $token, $role, $firstName, $lastName, $city, $companyName, $companyDescription, $avatarPath, $companyLogoPath, $about, $skills, $desiredSalary, $birthdate, $socialLinks, $resumePath, $gender, $industry, $educationInstitution, $educationDegree, $educationStart, $educationEnd, $educationDescription);
+$stmt->bind_param("sssss", $username, $email, $hashedPassword, $token, $role);
 
 if ($stmt->execute()) {
     $userId = $conn->insert_id; // Получаем ID нового пользователя

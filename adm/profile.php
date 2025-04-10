@@ -28,6 +28,8 @@ $result = $stmt->get_result();
 
 if ($result->num_rows == 1) {
     $user = $result->fetch_assoc();
+    // Сохраняем роль пользователя в сессии
+    $_SESSION['role'] = $user['role'];
 } else {
     die("Пользователь не найден!");
 }
@@ -43,6 +45,7 @@ $conn->close();
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="../css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 <div class="background"></div>
@@ -55,7 +58,7 @@ $conn->close();
             <?php elseif ($user['role'] == 'employer' && !empty($user['company_logo'])): ?>
                 <img src="<?php echo htmlspecialchars($user['company_logo']); ?>" alt="Логотип компании" class="avatar">
             <?php else: ?>
-                <img src="" alt="Аватар" class="avatar">
+                <img src="https://adm-hasyn.gosuslugi.ru/netcat_files/128/2202/scale_1200.jpg" alt="Аватар" class="avatar">
             <?php endif; ?>
         </div>
 
@@ -86,7 +89,7 @@ $conn->close();
                         <input type="text" value="<?php echo htmlspecialchars($user['role'] == 'seeker' ? 'Соискатель' : 'Работодатель'); ?>" readonly>
                     </div>
                 </div>
-                <!-- Предпросмотр резюме -->
+                 <!-- Предпросмотр резюме -->
                 <section class="info-block">
                 <?php if ($user['role'] == 'seeker'): ?>
                 <h2>Предпросмотр резюме</h2>
@@ -159,13 +162,26 @@ $conn->close();
                         <label><i class="fas fa-birthday-cake"></i> Дата рождения:</label>
                         <input type="text" value="<?php echo htmlspecialchars($user['birthdate'] ?? 'Не указано'); ?>" readonly>
                     </div>
-                </div>                   
+                </div>
+                 <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-venus-mars"></i> Пол:</label>
+                        <input type="text" value="<?php
+                        switch ($user['gender']) {
+                            case 'male': echo 'Мужской'; break;
+                            case 'female': echo 'Женский'; break;
+                            case 'other': echo 'Другой'; break;
+                            default: echo 'Не указано'; break;
+                        }
+                        ?>" readonly>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="form-row">
                         <label><i class="fas fa-money-bill-wave"></i> Желаемая зарплата:</label>
                         <input type="text" value="<?php echo htmlspecialchars($user['desired_salary'] ?? 'Не указано'); ?>" readonly>
                     </div>
-                </div>  
+                </div>
                  <div class="form-group">
                         <div class="form-row">
                             <label><i class="fas fa-tools"></i> Навыки:</label>
@@ -177,7 +193,7 @@ $conn->close();
                           <label><i class="fas fa-comment-dots"></i> О себе:</label>
                           <textarea  readonly><?php echo htmlspecialchars($user['about'] ?? 'Не указано'); ?></textarea>
                         </div>
-                    </div>       
+                    </div>
                  <div class="form-group">
                     <div class="form-row">
                         <label><i class="fas fa-share-alt"></i> Социальные сети:</label>
@@ -219,9 +235,6 @@ $conn->close();
                     </div>
                 </section>
             </section>
-
-            
-        </section>
             <?php endif; ?>
 
             <?php if ($user['role'] == 'employer'): ?>
