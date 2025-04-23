@@ -46,19 +46,30 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors["email"] = "Неверный формат email.";
 }
 
-// Проверка, существует ли пользователь с таким логином или email
-$stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-$stmt->bind_param("ss", $username, $email);
+// Проверка, существует ли пользователь с таким логином
+$sql = "SELECT id FROM users WHERE username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
 $stmt->execute();
-$result = $stmt->get_result();
+$stmt->store_result();
+$username_exists = $stmt->num_rows > 0;
+$stmt->close();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    if ($row && $row['username'] === $username) {
-        $errors["username"] = "Логин уже занят.";
-    } elseif ($row && $row['email'] === $email) {
-        $errors["email"] = "Email уже зарегистрирован.";
-    }
+// Проверка, существует ли пользователь с таким email
+$sql = "SELECT id FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+$email_exists = $stmt->num_rows > 0;
+$stmt->close();
+
+if ($username_exists) {
+    $errors["username"] = "Логин уже занят.";
+}
+
+if ($email_exists) {
+    $errors["email"] = "Email уже зарегистрирован.";
 }
 
 // Если есть ошибки, возвращаем на страницу регистрации
@@ -102,7 +113,7 @@ if ($stmt->execute()) {
 
     if ($mailSuccess) {
         // Перенаправляем на страницу логина с сообщением об успехе
-        header("Location: login.php?message=" . urlencode("На вашу почту отправлено письмо для подтверждения."));        
+        header("Location: login.php?message=" . urlencode("На вашу почту отправлено письмо для подтверждения."));
         exit();
     } else {
         // Если не удалось отправить письмо, выводим ошибку
@@ -115,4 +126,6 @@ if ($stmt->execute()) {
     header("Location: register.php?error=" . urlencode(json_encode($errors)));
     exit();
 }
+$stmt->close();
+$conn->close();
 ?>
