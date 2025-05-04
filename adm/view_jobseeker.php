@@ -92,35 +92,29 @@ $conn->close();
                 </div>
                 <!-- Другая информация о соискателе -->
                 <section class="info-block">
-                    <h2>Результаты профориентационного тестирования</h2>
-                    <?php
-                    // Отображаем результаты тестирования
-                    $testResults = json_decode($jobseeker['proforientation_test_results'], true);
-                    $recommendations = json_decode($jobseeker['proforientation_recommendations'], true);
+    <h2>Результаты профориентационного тестирования</h2>
+    <?php
+    // Получаем результаты тестирования и рекомендации из базы данных
+    $testResults = json_decode($jobseeker['proforientation_test_results'], true);
+    $recommendationsHTML = $jobseeker['proforientation_recommendations']; // Получаем HTML-разметку
 
-                    if ($testResults && is_array($testResults)) {
-                        echo "<p>Результаты:</p>";
-                        echo "<ul>";
-                        foreach ($testResults as $key => $value) {
-                            echo "<li>" . htmlspecialchars($key) . ": " . htmlspecialchars($value) . "</li>";
-                        }
-                        echo "</ul>";
-                    } else {
-                        echo "<p>Результаты не найдены.</p>";
-                    }
+    if ($testResults && is_array($testResults)) {
+        echo "<p>Результаты:</p>";
+        echo "<ul>";
+        foreach ($testResults as $key => $value) {
+            echo "<li>" . htmlspecialchars($key) . ": " . htmlspecialchars($value) . "</li>"; // Экранируем значения
+        }
+        echo "</ul>";
+    } else {
+        echo "<p>Результаты не найдены.</p>";
+    }
 
-                    if ($recommendations && is_array($recommendations)) {
-                        echo "<p>Рекомендации:</p>";
-                        echo "<ul>";
-                        foreach ($recommendations as $recommendation) {
-                            echo "<li>" . htmlspecialchars($recommendation) . "</li>";
-                        }
-                        echo "</ul>";
-                    } else {
-                        echo "<p>Рекомендации не найдены.</p>";
-                    }
-                    ?>
-                </section>
+    echo "<h2>Рекомендации:</h2>";
+    echo "<div class='recommendationsContainer'>"; // Добавляем контейнер для стилей
+    echo $recommendationsHTML; // Выводим HTML-разметку (БЕЗ ЭКРАНИРОВАНИЯ!)
+    echo "</div>";
+    ?>
+</section>
             </section>
         </div>
 

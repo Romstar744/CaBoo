@@ -300,3 +300,21 @@ body {
         height: 140px;
     }
 }
+
+.jobseeker-list {
+    margin-top: 20px;
+}
+
+.jobseeker-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.jobseeker-item p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px; /* Задайте максимальную ширину */
+}

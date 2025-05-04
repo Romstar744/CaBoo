@@ -59,18 +59,6 @@ $conn->close();
     <link rel="stylesheet" href="../css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .jobseeker-list {
-            margin-top: 20px;
-        }
-
-        .jobseeker-item {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
 <div class="background"></div>
@@ -263,61 +251,56 @@ $conn->close();
             <?php endif; ?>
 
             <?php if ($user['role'] == 'seeker'): ?>
-            <?php if (empty($user['proforientation_test_results'])): ?>
-                <div style="text-align:center; margin-top: 20px;">
-                    <a href="../testing/test.php" class="btn">Пройти тестирование</a>
+    <?php if (empty($user['proforientation_test_results'])): ?>
+        <div style="text-align:center; margin-top: 20px;">
+            <a href="../testing/test.php" class="btn">Пройти тестирование</a>
+        </div>
+    <?php else: ?>
+        <section class="info-block">
+            <h2>Результаты профориентационного тестирования</h2>
+            <?php
+            // Получаем результаты тестирования и рекомендации из базы данных
+            $testResults = json_decode($user['proforientation_test_results'], true); // Декодируем JSON с результатами
+            $recommendationsHTML = $user['proforientation_recommendations']; // Получаем HTML-разметку рекомендаций
+
+            if ($testResults && is_array($testResults)) {
+                echo "<p>Результаты:</p>";
+                echo "<ul>";
+                foreach ($testResults as $key => $value) {
+                    echo "<li>" . htmlspecialchars($key) . ": " . htmlspecialchars($value) . "</li>"; // Экранируем значения
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>Результаты не найдены.</p>";
+            }
+
+            echo "<h2>Рекомендации:</h2>";
+            echo "<div class='recommendationsContainer'>";
+            echo $recommendationsHTML; // Выводим HTML-разметку рекомендаций (БЕЗ ЭКРАНИРОВАНИЯ!)
+            echo "</div>";
+            ?>
+        </section>
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php if ($user['role'] == 'employer'): ?>
+    <section class="info-block jobseeker-list">
+        <h2>Список соискателей, прошедших тестирование</h2>
+        <?php if (!empty($jobseekers)): ?>
+            <?php foreach ($jobseekers as $jobseeker): ?>
+                <div class="jobseeker-item">
+                    <h3><?php echo htmlspecialchars($jobseeker['first_name'] . ' ' . $jobseeker['last_name'] . ' (' . $jobseeker['username'] . ')'); ?></h3>
+                    <p>Результаты тестирования: <?php echo htmlspecialchars(substr($jobseeker['proforientation_test_results'], 0, 100)) . '...'; ?></p>
+                    <p>Рекомендации: <?php echo htmlspecialchars(substr($jobseeker['proforientation_recommendations'], 0, 100)) . '...'; ?></p>
+                    <a href="view_jobseeker.php?id=<?php echo htmlspecialchars($jobseeker['id']); ?>">Просмотреть профиль</a>
                 </div>
-            <?php else: ?>
-                <section class="info-block">
-                    <h2>Результаты профориентационного тестирования</h2>
-                    <?php
-                    // Отображаем результаты тестирования
-                    $testResults = json_decode($user['proforientation_test_results'], true);
-                    $recommendations = json_decode($user['proforientation_recommendations'], true);
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Нет соискателей, прошедших тестирование.</p>
+        <?php endif; ?>
+    </section>
+<?php endif; ?>
 
-                    if ($testResults && is_array($testResults)) {
-                        echo "<p>Результаты:</p>";
-                        echo "<ul>";
-                        foreach ($testResults as $key => $value) {
-                            echo "<li>" . htmlspecialchars($key) . ": " . htmlspecialchars($value) . "</li>";
-                        }
-                        echo "</ul>";
-                    } else {
-                        echo "<p>Результаты не найдены.</p>";
-                    }
-
-                    if ($recommendations && is_array($recommendations)) {
-                        echo "<p>Рекомендации:</p>";
-                        echo "<ul>";
-                        foreach ($recommendations as $recommendation) {
-                            echo "<li>" . htmlspecialchars($recommendation) . "</li>";
-                        }
-                        echo "</ul>";
-                    } else {
-                        echo "<p>Рекомендации не найдены.</p>";
-                    }
-                    ?>
-                </section>
-            <?php endif; ?>
-            <?php endif; ?>
-
-            <?php if ($user['role'] == 'employer'): ?>
-            <section class="info-block jobseeker-list">
-                <h2>Список соискателей, прошедших тестирование</h2>
-                <?php if (!empty($jobseekers)): ?>
-                    <?php foreach ($jobseekers as $jobseeker): ?>
-                        <div class="jobseeker-item">
-                            <h3><?php echo htmlspecialchars($jobseeker['first_name'] . ' ' . $jobseeker['last_name'] . ' (' . $jobseeker['username'] . ')'); ?></h3>
-                            <p>Результаты тестирования: <?php echo htmlspecialchars(substr($jobseeker['proforientation_test_results'], 0, 100)) . '...'; ?></p>
-                            <p>Рекомендации: <?php echo htmlspecialchars(substr($jobseeker['proforientation_recommendations'], 0, 100)) . '...'; ?></p>
-                            <a href="view_jobseeker.php?id=<?php echo htmlspecialchars($jobseeker['id']); ?>">Просмотреть профиль</a>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Нет соискателей, прошедших тестирование.</p>
-                <?php endif; ?>
-            </section>
-            <?php endif; ?>
         </div>
 
         <div style="text-align:center">
