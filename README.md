@@ -1,2 +1,2 @@
-# local CaBoo version
- second version, not for all, only developer!!!
+# host CaBoo version
+ third version, pre-release!!!
