@@ -105,7 +105,7 @@ $conn->close();
                  <!-- Предпросмотр резюме -->
                 <section class="info-block">
                 <?php if ($user['role'] == 'seeker'): ?>
-                <h2>Предпросмотр резюме</h2>
+                <h2>Резюме соискателя</h2>
                 <div class="resume-preview">
                     <?php
                     $relativePath = $user['resume']; // Относительный путь из базы данных
@@ -138,7 +138,7 @@ $conn->close();
                             // Google Docs Viewer
                             echo '<iframe src="https://docs.google.com/viewer?url=' . urlencode($resumePath) . '&embedded=true" width="100%" height="600"></iframe>';
                         } else {
-                            echo '<p>Неподдерживаемый формат файла.</p>';
+                            echo '<p>Неподдерживаемый формат файла или отсуствует загруженный документ.</p>';
                         }
                     } else {
                         echo '<p>Резюме не загружено.</p>';

@@ -42,13 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   }
             } else {
                 // Неверный пароль - используем сессию вместо URL
-                $_SESSION['error'] = "Неверный данные для входа.";
+                $_SESSION['error'] = "Ошибка входа. Проверьте данные.";
                 header("Location: login.php");
                  exit();
             }
     } else {
         // Пользователь не найден - используем сессию вместо URL
-        $_SESSION['error'] = "Пользователь не найден.";
+        $_SESSION['error'] = "Ошибка входа. Проверьте данные.";
         header("Location: login.php");
         exit();
     }
