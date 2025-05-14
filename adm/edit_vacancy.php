@@ -45,7 +45,12 @@ $stmt->close();
 <html>
 <head>
     <title>Редактирование вакансии</title>
-    <link rel="stylesheet" href="../css/profile.css">
+    <!-- Подключаем Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Подключаем Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Подключаем файл CSS -->
+    <link rel="stylesheet" href="../css/create_vacancy.css">
 </head>
 <body>
     <div class="container">
