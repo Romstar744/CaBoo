@@ -318,3 +318,154 @@ body {
     white-space: nowrap;
     max-width: 200px; /* Задайте максимальную ширину */
 }
+
+/* Управление вакансиями */
+.vacancy-management {
+    background-color: #f8f8ff;
+    border-radius: 20px;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 35px;
+    animation: fadeInUp 0.9s ease-in-out;
+}
+
+.vacancy-management:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.vacancy-management h2 {
+    color: #7b1fa2;
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 4px solid #e0e0e0;
+    padding-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+/* Кнопка "Создать новую вакансию" */
+.create-vacancy-btn {
+    display: inline-block !important;
+    padding: 12px 25px !important;
+    margin-bottom: 25px !important;
+    background: linear-gradient(45deg, #4caf50, #81c784) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    font-size: 1.1em !important;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.create-vacancy-btn:hover {
+    background: linear-gradient(45deg, #388e3c, #66bb6a);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Список вакансий */
+.vacancy-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Элемент вакансии */
+.vacancy-item {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vacancy-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.vacancy-item h3 {
+    color: #5e35b1;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+}
+
+.vacancy-item p {
+    color: #757575;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* Действия с вакансией (редактировать, удалить) */
+.vacancy-actions {
+    text-align: right;
+}
+
+.vacancy-actions a.btn {
+    display: inline-block;
+    padding: 10px 10px;
+    margin-left: -11px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+/* Кнопка "Редактировать" */
+.vacancy-actions .edit-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    background: linear-gradient(45deg, #03a9f4, #4fc3f7) !important;
+    color: #fff !important;
+    border: none ; /* Убираем возможные стили border из общего .btn */
+    cursor: pointer;
+}
+
+.vacancy-actions .edit-btn:hover {
+    background: linear-gradient(45deg, #0288d1, #29b6f6);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Кнопка "Удалить" */
+.vacancy-actions .delete-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    background: linear-gradient(45deg, #f44336, #e57373) !important;
+    color: #fff !important;
+    border: none; /* Убираем возможные стили border из общего .btn */
+    cursor: pointer;
+}
+
+.vacancy-actions .delete-btn:hover {
+    background: linear-gradient(45deg, #d32f2f, #e53935);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}

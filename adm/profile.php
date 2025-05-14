@@ -329,19 +329,18 @@ if ($user['role'] == 'employer') {
 <?php endif; ?>
 
 <?php if ($user['role'] == 'employer'): ?>
-    <section class="info-block">
+    <section class="info-block vacancy-management">
         <h2>Управление вакансиями</h2>
-        <a href="create_vacancy.php" class="btn">Создать новую вакансию</a>
+        <a href="create_vacancy.php" class="btn create-vacancy-btn">Создать новую вакансию</a>
 
         <?php
-        
         // Получаем вакансии компании
         $sql = "SELECT * FROM vacancies WHERE company_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
         $vacancies = $stmt->get_result();
-        $conn->close();
+
         if ($vacancies->num_rows > 0): ?>
             <div class="vacancy-list">
                 <?php while($vacancy = $vacancies->fetch_assoc()): ?>
@@ -349,17 +348,15 @@ if ($user['role'] == 'employer') {
                         <h3><?= htmlspecialchars($vacancy['title']) ?></h3>
                         <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?></p>
                         <div class="vacancy-actions">
-                            <a href="edit_vacancy.php?id=<?= $vacancy['id'] ?>">Редактировать</a>
-                            <a href="delete_vacancy.php?id=<?= $vacancy['id'] ?>" class="delete">Удалить</a>
+                            <a href="edit_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn edit-btn">Редактировать</a>
+                            <a href="delete_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn delete-btn">Удалить</a>
                         </div>
                     </div>
-                    
                 <?php endwhile; ?>
             </div>
         <?php else: ?>
             <p>У вас пока нет активных вакансий</p>
         <?php endif; ?>
-        
     </section>
 <?php endif; ?>
 
