@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../login.php");
     exit();
@@ -46,8 +50,6 @@ if ($user['role'] == 'employer') {
         }
     }
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -280,6 +282,31 @@ $conn->close();
             echo "</div>";
             ?>
         </section>
+
+        <!-- Отображение доступных вакансий для соискателя, прошедшего тестирование -->
+        <section class="info-block">
+            <h2>Доступные вакансии</h2>
+            <?php
+                $sql = "SELECT v.*, u.company_name 
+                        FROM vacancies v
+                        JOIN users u ON v.company_id = u.id";
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0): ?>
+                    <div class="vacancy-list">
+                        <?php while($vacancy = $result->fetch_assoc()): ?>
+                            <div class="vacancy-item">
+                                <h3><?= htmlspecialchars($vacancy['title']) ?></h3>
+                                <p>Компания: <?= htmlspecialchars($vacancy['company_name']) ?></p>
+                                <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?></p>
+                                <a href="view_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn">Подробнее</a>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                <?php else: ?>
+                    <p>Нет доступных вакансий</p>
+                <?php endif; ?>
+        </section>
     <?php endif; ?>
 <?php endif; ?>
 
@@ -298,6 +325,41 @@ $conn->close();
         <?php else: ?>
             <p>Нет соискателей, прошедших тестирование.</p>
         <?php endif; ?>
+    </section>
+<?php endif; ?>
+
+<?php if ($user['role'] == 'employer'): ?>
+    <section class="info-block">
+        <h2>Управление вакансиями</h2>
+        <a href="create_vacancy.php" class="btn">Создать новую вакансию</a>
+
+        <?php
+        
+        // Получаем вакансии компании
+        $sql = "SELECT * FROM vacancies WHERE company_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $vacancies = $stmt->get_result();
+        $conn->close();
+        if ($vacancies->num_rows > 0): ?>
+            <div class="vacancy-list">
+                <?php while($vacancy = $vacancies->fetch_assoc()): ?>
+                    <div class="vacancy-item">
+                        <h3><?= htmlspecialchars($vacancy['title']) ?></h3>
+                        <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?></p>
+                        <div class="vacancy-actions">
+                            <a href="edit_vacancy.php?id=<?= $vacancy['id'] ?>">Редактировать</a>
+                            <a href="delete_vacancy.php?id=<?= $vacancy['id'] ?>" class="delete">Удалить</a>
+                        </div>
+                    </div>
+                    
+                <?php endwhile; ?>
+            </div>
+        <?php else: ?>
+            <p>У вас пока нет активных вакансий</p>
+        <?php endif; ?>
+        
     </section>
 <?php endif; ?>
 
