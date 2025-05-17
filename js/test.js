@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             const testResults = getTestResults();
-            const recommendations = getRecommendations(testResults); // Генерируем рекомендации
+            const recommendations = getRecommendations(testResults);
 
             const formData = new FormData();
-            formData.append('test_results', JSON.stringify(testResults)); // Отправляем результаты в JSON
-            formData.append('recommendations', recommendations); // Отправляем рекомендации в JSON
+            formData.append('test_results', JSON.stringify(testResults));
+            formData.append('recommendations', recommendations);
 
             fetch('../adm/test_handler.php', {
                 method: 'POST',
@@ -32,26 +32,73 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Определяем соответствия вопросов и ответов на русском языке
+    const questionTranslations = {
+        q1: "Что вам больше нравится?",
+        q2: "Какие навыки у вас развиты лучше?",
+        q3: "Каким вы видите себя?",
+        q4: "Какой язык программирования вам ближе?",
+        q5: "Что для вас важнее всего?",
+        q6: "Как вы предпочитаете учиться?",
+        q7: "Что вам интересно в ИТ?",
+        q8: "Что важно в командной работе?",
+        q9: "Как вы решаете проблемы?",
+        q10: "Какую роль вы предпочитаете в команде?"
+    };
+
+    const answerTranslations = {
+        reading: "Чтение",
+        coding: "Программирование",
+        designing: "Дизайн",
+        playing: "Игры",
+        problem_solving: "Решение проблем",
+        communication: "Общение",
+        creativity: "Творчество",
+        analytical_skills: "Аналитические навыки",
+        organized: "Организованный",
+        creative: "Творческий",
+        outgoing: "Общительный",
+        independent: "Независимый",
+        python: "Python",
+        javascript: "JavaScript",
+        java: "Java",
+        csharp: "C#",
+        salary: "Зарплата",
+        interesting_tasks: "Интересные задачи",
+        career_growth: "Карьерный рост",
+        work_life_balance: "Баланс работы и личной жизни",
+        web_development: "Веб-разработка",
+        mobile_development: "Мобильная разработка",
+        data_science: "Наука о данных",
+        game_development: "Разработка игр",
+        collaboration: "Сотрудничество",
+        clear_communication: "Четкое общение",
+        shared_goals: "Общие цели",
+        respect: "Уважение",
+        break_down: "Разбиваю на части",
+        research: "Исследую",
+        ask_for_help: "Прошу помощи",
+        experiment: "Экспериментирую",
+        leader: "Лидер",
+        executor: "Исполнитель",
+        analyst: "Аналитик",
+        tester: "Тестировщик"
+    };
+
     function getTestResults() {
-        const results = {
-            q1: document.getElementById('q1').value,
-            q2: document.getElementById('q2').value,
-            q3: document.getElementById('q3').value,
-            q4: document.getElementById('q4').value,
-            q5: document.getElementById('q5').value,
-            q6: document.getElementById('q6').value,
-            q7: document.getElementById('q7').value,
-            q8: document.getElementById('q8').value,
-            q9: document.getElementById('q9').value,
-            q10: document.getElementById('q10').value
-        };
+        const results = {};
+        for (let i = 1; i <= 10; i++) {
+            const questionId = `q${i}`;
+            const answerId = document.getElementById(questionId).value;
+            results[questionId] = answerTranslations[answerId]; // Сохраняем только ПЕРЕВОДЫ ответов
+        }
         return results;
     }
 
    function getRecommendations(results) {
         // Веса для каждого ответа
         const weights = {
-            'q1': {
+            'q1': { // Используем ID вопросов
                 'reading': { 'Веб-разработка': 1, 'Data Science': 1, 'Анализ': 1 },
                 'coding': { 'Веб-разработка': 2, 'Data Science': 2, 'Разработка игр': 2 },
                 'designing': { 'Веб-разработка': 1, 'UX/UI': 2, 'Front-end': 1 },

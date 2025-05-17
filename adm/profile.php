@@ -100,9 +100,10 @@ if ($user['role'] == 'employer') {
                         <input type="text" value="<?php echo htmlspecialchars($user['role'] == 'seeker' ? 'Соискатель' : 'Работодатель'); ?>" readonly>
                     </div>
                 </div>
+                <?php if ($user['role'] == 'seeker'): ?>
                  <!-- Предпросмотр резюме -->
                 <section class="info-block">
-                <?php if ($user['role'] == 'seeker'): ?>
+                
                 <h2>Резюме соискателя</h2>
                 <div class="resume-preview">
                     <?php
@@ -256,6 +257,7 @@ if ($user['role'] == 'employer') {
     <?php else: ?>
         <section class="info-block">
             <h2>Результаты профориентационного тестирования</h2>
+            <div id="testResults">
             <?php
             // Получаем результаты тестирования и рекомендации из базы данных
             $testResults = json_decode($user['proforientation_test_results'], true); // Декодируем JSON с результатами
@@ -265,6 +267,7 @@ if ($user['role'] == 'employer') {
                 echo "<p>Результаты:</p>";
                 echo "<ul>";
                 foreach ($testResults as $key => $value) {
+                    $questionId = htmlspecialchars($key);
                     echo "<li>" . htmlspecialchars($key) . ": " . htmlspecialchars($value) . "</li>"; // Экранируем значения
                 }
                 echo "</ul>";
@@ -277,6 +280,7 @@ if ($user['role'] == 'employer') {
             echo $recommendationsHTML; // Выводим HTML-разметку рекомендаций (БЕЗ ЭКРАНИРОВАНИЯ!)
             echo "</div>";
             ?>
+            </div>
         </section>
 
         <!-- Отображение доступных вакансий для соискателя, прошедшего тестирование -->
@@ -305,6 +309,30 @@ if ($user['role'] == 'employer') {
         </section>
     <?php endif; ?>
 <?php endif; ?>
+
+<?php if ($user['role'] == 'employer'): ?>
+            <section class="info-block">
+                <h2>Информация о работодателе</h2>
+                <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-building"></i> Название компании:</label>
+                        <input type="text" name="companyName" value="<?php echo htmlspecialchars($user['company_name']  ?? 'Не указано'); ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-industry"></i> Индустрия:</label>
+                        <input type="text" name="industry" value="<?php echo htmlspecialchars($user['industry'] ?? 'Не указано'); ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-comment-dots"></i> Описание компании:</label>
+                        <textarea readonly="companyDescription"><?php echo htmlspecialchars($user['company_description'] ?? 'Не указано'); ?> </textarea>
+                    </div>
+                </div>
+            </section>
+            <?php endif; ?>
 
 <?php if ($user['role'] == 'employer'): ?>
     <section class="info-block jobseeker-list">
