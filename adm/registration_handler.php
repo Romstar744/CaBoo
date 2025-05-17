@@ -72,6 +72,22 @@ if ($email_exists) {
     $errors["email"] = "Email уже зарегистрирован.";
 }
 
+// Получаем и валидируем поля компании, если роль - работодатель
+$company_name = null;
+$industry = null;
+if ($role == 'employer') {
+    $company_name = validate($_POST["company_name"]);
+    $industry = validate($_POST["industry"]);
+
+    if (empty($company_name)) {
+        $errors["company_name"] = "Название компании обязательно для заполнения.";
+    }
+
+    if (empty($industry)) {
+        $errors["industry"] = "Индустрия обязательна для заполнения.";
+    }
+}
+
 // Если есть ошибки, возвращаем на страницу регистрации
 if (!empty($errors)) {
     $encoded_errors = urlencode(json_encode($errors));
@@ -86,9 +102,11 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 $token = generate_token();
 
 // SQL-запрос для добавления нового пользователя
-$sql = "INSERT INTO users (username, email, password, email_verification_token, is_email_verified, role) VALUES (?, ?, ?, ?, 0, ?)";
+// Добавляем поля company_name и industry в запрос
+$sql = "INSERT INTO users (username, email, password, email_verification_token, is_email_verified, role, company_name, industry) VALUES (?, ?, ?, ?, 0, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssss", $username, $email, $hashedPassword, $token, $role);
+// Привязываем параметры, включая company_name и industry
+$stmt->bind_param("sssssss", $username, $email, $hashedPassword, $token, $role, $company_name, $industry);
 
 if ($stmt->execute()) {
     $userId = $conn->insert_id; // Получаем ID нового пользователя

@@ -30,6 +30,25 @@ document.addEventListener('DOMContentLoaded', function() {
         checkUsernameAvailability(this.value);
     });
 
+     // Новая логика для отображения/скрытия полей и валидации
+    const employerFields = document.getElementById('employerFields');
+    const seekerRole = document.getElementById('seekerRole');
+    const employerRole = document.getElementById('employerRole');
+    const companyNameInput = document.getElementById('company_name');
+    const industryInput = document.getElementById('industry');
+
+    function toggleEmployerFields() {
+        employerFields.style.display = employerRole.checked ? 'block' : 'none';
+        companyNameInput.required = employerRole.checked;
+        industryInput.required = employerRole.checked;
+    }
+
+    seekerRole.addEventListener('change', toggleEmployerFields);
+    employerRole.addEventListener('change', toggleEmployerFields);
+
+    // Инициализация при загрузке страницы
+    toggleEmployerFields();
+
     const registerForm = document.querySelector('.register-form');
     if(registerForm){
         registerForm.addEventListener('submit', function(event) {

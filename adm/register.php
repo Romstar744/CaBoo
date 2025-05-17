@@ -33,6 +33,21 @@
             </div>
         </fieldset>
 
+
+        <fieldset id="employerFields" style="display: none;">
+            <legend>Информация о компании</legend>
+            <div class="form-group">
+                <label for="company_name">Название компании:<i class="fas fa-building"></i></label>
+                <input type="text" id="company_name" name="company_name" required>
+                <div class="error-message" id="companyNameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="industry">Индустрия:<i class="fas fa-industry"></i></label>
+                <input type="text" id="industry" name="industry" required>
+                <div class="error-message" id="industryError"></div>
+            </div>
+        </fieldset>
+
         <fieldset>
             <legend>Выберите роль</legend>
              <div class="form-group role-selector">
