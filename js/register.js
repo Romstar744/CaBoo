@@ -19,7 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!emailInput.validity.valid) {
             emailError.textContent = 'Пожалуйста, введите корректный email.';
             emailInput.classList.add('invalid');
-        } else {
+        } else if (!/@gmail\.com$/.test(this.value)) { // Проверка gmail
+            emailError.textContent = 'Разрешена только Gmail почта.';
+            emailInput.classList.add('invalid');
+        }
+         else {
             checkEmailAvailability(this.value);
             emailInput.classList.remove('invalid');
         }
@@ -49,6 +53,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализация при загрузке страницы
     toggleEmployerFields();
 
+    //Валидация пароля
+    const passwordInput = document.getElementById('password');
+    let isPasswordValid = false; // Флаг для отслеживания валидности пароля
+
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const passwordError = document.getElementById('passwordError');
+        let isValid = true;
+
+        if (password.length < 8) {
+            passwordError.textContent = 'Пароль должен содержать не менее 8 символов.';
+            isValid = false;
+        } else if (!/[A-Z]/.test(password)) {
+            passwordError.textContent = 'Пароль должен содержать хотя бы одну заглавную букву.';
+            isValid = false;
+        } else if (!/[^a-zA-Z0-9\s]/.test(password)) {
+            passwordError.textContent = 'Пароль должен содержать хотя бы один спец. символ.';
+            isValid = false;
+        } else {
+            passwordError.textContent = '';
+        }
+
+        if (isValid) {
+            passwordInput.classList.remove('invalid');
+            passwordError.textContent = '';
+            isPasswordValid = true; // Пароль валиден
+        } else {
+            passwordInput.classList.add('invalid');
+            isPasswordValid = false; // Пароль невалиден
+        }
+    });
+
+    // Убираем класс invalid при фокусе на поле
+    passwordInput.addEventListener('focus', function() {
+        this.classList.remove('invalid');
+    });
+
     const registerForm = document.querySelector('.register-form');
     if(registerForm){
         registerForm.addEventListener('submit', function(event) {
@@ -70,7 +111,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
-
+           // Проверка валидности пароля перед отправкой формы
+            if (!isPasswordValid) {
+                isValid = false;
+                passwordInput.classList.add('invalid');
+                const passwordError = document.getElementById('passwordError');
+                passwordError.textContent = 'Пароль не соответствует требованиям.';
+            }
+             // Проверка email на gmail перед отправкой формы
+            const emailInput = document.getElementById('email');
+            if (!/@gmail\.com$/.test(emailInput.value)) {
+               isValid = false;
+               emailInput.classList.add('invalid');
+               const emailError = document.getElementById('emailError');
+               emailError.textContent = 'Разрешена только Gmail почта.';
+            }
             if (!isValid) {
                 event.preventDefault();
                 alert('Пожалуйста, заполните все обязательные поля.');

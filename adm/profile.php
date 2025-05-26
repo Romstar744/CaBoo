@@ -191,7 +191,7 @@ if ($user['role'] == 'employer') {
                 <div class="form-group">
                     <div class="form-row">
                         <label><i class="fas fa-money-bill-wave"></i> Желаемая зарплата:</label>
-                        <input type="text" value="<?php echo htmlspecialchars($user['desired_salary'] ?? 'Не указано'); ?>" readonly>
+                        <input type="text" value="<?php echo htmlspecialchars($user['desired_salary'] ?? 'Не указано'); ?> ₽" readonly>
                     </div>
                 </div>
                  <div class="form-group">
@@ -298,7 +298,7 @@ if ($user['role'] == 'employer') {
                             <div class="vacancy-item">
                                 <h3><?= htmlspecialchars($vacancy['title']) ?></h3>
                                 <p>Компания: <?= htmlspecialchars($vacancy['company_name']) ?></p>
-                                <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?></p>
+                                <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?> ₽</p>
                                 <a href="view_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn">Подробнее</a>
                             </div>
                         <?php endwhile; ?>
@@ -370,7 +370,7 @@ if ($user['role'] == 'employer') {
                 <?php while($vacancy = $vacancies->fetch_assoc()): ?>
                     <div class="vacancy-item">
                         <h3><?= htmlspecialchars($vacancy['title']) ?></h3>
-                        <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?></p>
+                        <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?> ₽</p>
                         <div class="vacancy-actions">
                             <a href="edit_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn edit-btn">Редактировать</a>
                             <a href="delete_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn delete-btn">Удалить</a>

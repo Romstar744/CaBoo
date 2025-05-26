@@ -41,10 +41,19 @@ $errors = [];
 if (strlen($password) < 8) {
     $errors["password"] = "Пароль должен быть не менее 8 символов.";
 }
-
+if (!preg_match('/[A-Z]/', $password)) {
+    $errors["password"] = "Пароль должен содержать хотя бы одну заглавную букву.";
+}
+if (!preg_match('/[^a-zA-Z0-9\s]/', $password)) {
+    $errors["password"] = "Пароль должен содержать хотя бы один спец. символ.";
+}
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors["email"] = "Неверный формат email.";
 }
+if (!preg_match('/@gmail\.com$/', $email)) {
+    $errors["email"] = "Разрешена только Gmail почта.";
+}
+
 
 // Проверка, существует ли пользователь с таким логином
 $sql = "SELECT id FROM users WHERE username = ?";

@@ -39,7 +39,10 @@ if ($_SESSION['role'] != 'employer') {
 
                 <div class="form-group">
                     <label for="salary"><i class="fas fa-dollar-sign"></i> Зарплата:</label>
-                    <input type="text" id="salary" name="salary" placeholder="Укажите предлагаемую зарплату">
+                    <div class="salary-input">
+                        <input type="number" id="salary" name="salary" placeholder="Укажите предлагаемую зарплату" min="0" max="9999999">
+                        <span class="currency">₽</span>
+                    </div>
                 </div>
 
                 <button type="submit"><i class="fas fa-check"></i> Опубликовать</button>

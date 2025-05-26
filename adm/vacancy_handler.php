@@ -26,7 +26,7 @@ $company_id = $_SESSION['user_id'];
 $title = htmlspecialchars(strip_tags($title));
 $description = htmlspecialchars(strip_tags($description));
 $requirements = htmlspecialchars(strip_tags($requirements));
-$salary = htmlspecialchars(strip_tags($salary));
+$salary = is_numeric($salary) ? intval($salary) : null; // Преобразуем в число, если возможно
 $company_id = intval($company_id);
 
 // Подготовленный запрос для защиты от SQL-инъекций

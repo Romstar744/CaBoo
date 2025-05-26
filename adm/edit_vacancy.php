@@ -75,8 +75,11 @@ $stmt->close();
                 </div>
 
                 <div class="form-group">
-                    <label for="salary">Зарплата:</label>
-                    <input type="text" id="salary" name="salary" value="<?php echo htmlspecialchars($vacancy['salary']); ?>">
+                    <label for="salary"><i class="fas fa-dollar-sign"></i> Зарплата:</label>
+                    <div class="salary-input">
+                        <input type="number" id="salary" name="salary" placeholder="Укажите предлагаемую зарплату" min="0" max="9999999">
+                        <span class="currency">₽</span>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn">Сохранить изменения</button>

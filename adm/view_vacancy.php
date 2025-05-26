@@ -61,7 +61,7 @@ $conn->close();
         <div class="profile-form">
             <h1><?php echo htmlspecialchars($vacancy['title']); ?></h1>
             <p>Компания: <?php echo htmlspecialchars($vacancy['company_name']); ?></p>
-            <p>Зарплата: <?php echo htmlspecialchars($vacancy['salary']); ?></p>
+            <p>Зарплата: <?php echo htmlspecialchars($vacancy['salary']); ?> ₽</p>
             <p>Описание: <?php echo htmlspecialchars($vacancy['description']); ?></p>
             <p>Требования: <?php echo htmlspecialchars($vacancy['requirements']); ?></p>
             <a href="profile.php" class="back-link">Вернуться в личный кабинет</a>

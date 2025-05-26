@@ -115,6 +115,56 @@ button[type="submit"]:hover,
     background: linear-gradient(45deg, #616161, #8a8a8a);
 }
 
+.salary-input {
+    position: relative; /* Для позиционирования значка рубля */
+}
+
+.salary-input .currency {
+    position: absolute;
+    top: 50%;
+    right: 15px; /* Отступ от края */
+    transform: translateY(-50%); /* Выравнивание по вертикали */
+    font-size: 1.2em;
+    color: #757575;
+    pointer-events: none; /* Чтобы не мешать кликам по полю ввода */
+}
+
+/* Стили для input[type="number"] */
+input[type="number"] {
+    width: 100%;
+    padding: 17px;
+    border: 2px solid #bdbdbd;
+    border-radius: 12px;
+    font-size: 1.1em;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+    outline: none;
+    /*  Убрали ограничение длины в CSS */
+}
+
+input[type="number"]:focus {
+    border-color: #9c27b0;
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"] {
+    /*  Ограничение длины вводимых символов */
+    maxlength: 7;
+}
+
 /* Анимации (оставил только fadeIn, slideInDown и slideInLeft) */
 @keyframes fadeIn {
     from {

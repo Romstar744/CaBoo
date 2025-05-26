@@ -22,17 +22,16 @@
                 <div class="error-message" id="usernameError"></div>
             </div>
             <div class="form-group">
-                <label for="email">Email:<i class="fas fa-envelope"></i></label>
-                <input type="email" id="email" name="email" id="email" required>
+                <label for="email">Email: (только gmail)<i class="fas fa-envelope"></i></label>
+                <input type="email" id="email" name="email" required>
                 <div class="error-message" id="emailError"></div>
             </div>
             <div class="form-group">
-                <label for="password">Пароль:<i class="fas fa-lock"></i></label>
+                <label for="password">Пароль: (не менее 8 символов, 1 загл. буква, 1 символ)<i class="fas fa-lock"></i></label>
                 <input type="password" id="password" name="password" required>
                 <div class="error-message" id="passwordError"></div>
             </div>
         </fieldset>
-
 
         <fieldset id="employerFields" style="display: none;">
             <legend>Информация о компании</legend>
@@ -72,7 +71,7 @@
         </fieldset>
 
         <div class="form-group button-group">
-            <button type="submit" class="btn">Зарегистрироваться</button>
+            <a href="registration_handler.php" class="btn" onclick="document.getElementById('registerForm').submit(); return false;">Зарегистрироваться</a>
             <a href="../index.php" class="btn btn-secondary">На главную</a>
         </div>
         <a href="login.php" class="login-link">Уже есть аккаунт?</a>
