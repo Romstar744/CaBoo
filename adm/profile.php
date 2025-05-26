@@ -100,10 +100,11 @@ if ($user['role'] == 'employer') {
                         <input type="text" value="<?php echo htmlspecialchars($user['role'] == 'seeker' ? 'Соискатель' : 'Работодатель'); ?>" readonly>
                     </div>
                 </div>
-                <?php if ($user['role'] == 'seeker'): ?>
-                 <!-- Предпросмотр резюме -->
-                <section class="info-block">
-                
+        <?php if ($user['role'] == 'seeker'): ?>
+            <section class="info-block">
+                <div class="resume-download-button">
+                    <p>Скачать шаблон резюме <a href="../resumes/resume.docx" class="btn btn-sm" download="resume_template.docx"> <i class="fas fa-download"></i></a></p>
+                </div>
                 <h2>Резюме соискателя</h2>
                 <div class="resume-preview">
                     <?php
@@ -145,7 +146,7 @@ if ($user['role'] == 'employer') {
                     ?>
                 </div>
                 <?php endif; ?>
-            </section>
+            </section>           
             </section>
 
             <?php if ($user['role'] == 'seeker'): ?>

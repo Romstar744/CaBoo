@@ -37,7 +37,7 @@ body {
     overflow: hidden;
     transition: box-shadow 0.3s ease;
     animation: fadeIn 0.8s ease-in-out;
-    padding: 45px; /* Отступы, как на странице авторизации */
+    padding: 45px;
 }
 
 .profile-form h1 {
@@ -51,7 +51,7 @@ body {
     border-bottom: 3px solid rgba(255, 255, 255, 0.2);
     animation: slideInDown 0.8s ease-in-out;
     font-weight: 700;
-    margin-bottom: 40px; /* Отступы, как на странице авторизации */
+    margin-bottom: 40px;
 }
 
 /* Аватар */
@@ -83,7 +83,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
     gap: 35px;
-    padding: 45px; /* Отступы, как на странице авторизации */
+    padding: 45px;
 }
 
 .info-block {
@@ -93,6 +93,7 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 35px;
     animation: fadeInUp 0.9s ease-in-out;
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Add subtle border */
 }
 
 .info-block:hover {
@@ -112,7 +113,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 35px; /* Отступы, как на странице авторизации */
+    margin-bottom: 35px;
     animation: slideInLeft 0.6s ease-in-out;
 }
 
@@ -211,6 +212,58 @@ body {
 .warning {
     color: #d32f2f;
     font-weight: 700;
+}
+
+.resume-download-button {
+    z-index: 2;
+}
+
+.resume-download-button a.btn-sm {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.1);
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.resume-download-button a.btn-sm:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/*Добавим стили для .btn-sm*/
+.btn-sm {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background: linear-gradient(45deg, #9c27b0, #ba68c8);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-sm:hover {
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+/* Добавляем стили для подписи */
+.resume-download-label {
+    z-index: 2;
+    color: #757575;
+    font-size: 0.9em;
+    line-height: 1.2;
+    /* Добавлено для лучшего выравнивания с кнопкой, если нужно */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Анимации */
@@ -381,6 +434,7 @@ body {
 /* Список вакансий */
 .vacancy-list {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
 }
 
@@ -469,4 +523,28 @@ body {
         margin: 5px 0; /*  Отступы сверху и снизу  */
         width: 90%; /*  Кнопки занимают всю ширину  */
     }
+}
+
+/* Дополнительные стили */
+.info-block p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.info-block a.btn {
+    background: linear-gradient(45deg, #42a5f5, #64b5f6);
+}
+
+.info-block a.btn:hover {
+    background: linear-gradient(45deg, #1e88e5, #42a5f5);
+}
+
+.profile-info a {
+    color: #7b1fa2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.profile-info a:hover {
+    color: #5e35b1;
 }

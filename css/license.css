@@ -1,0 +1,30 @@
+/* Стили для страницы лицензионного соглашения */
+.license-page {
+    padding: 50px 0;
+}
+
+.license-agreement .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.license-agreement h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #5e35b1;
+}
+
+.license-agreement .agreement-text {
+    color: #757575;
+    line-height: 1.6;
+}
+
+.license-agreement .agreement-text strong {
+    color: #4a4a4a;
+}
+
+/* Дополнительные стили, если необходимо */

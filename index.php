@@ -237,16 +237,17 @@ $isLoggedIn = isUserLoggedIn();
     <footer>
     <div class="container">
         <div class="social">
-           <a href="#"><i class="fab fa-vk"></i></a>
-           <a href="#"><i class="fab fa-github"></i></a>
-           <a href="#"><i class="fab fa-telegram-plane"></i></a>
+           <a href="https://vk.com/lil_spal"><i class="fab fa-vk"></i></a>
+           <a href="https://github.com/Romstar744"><i class="fab fa-github"></i></a>
+           <a href="https://t.me/LIL_SPAL"><i class="fab fa-telegram-plane"></i></a>
         </div>
         <div class="footer-links">
            <ul>
-               <li><a class="active" href="https://journal.tinkoff.ru/flows/career/">Статьи</a></li>
-               <li><a class="active" href="license\license.php">Лицензионное соглашение</a></li>
-               <li><a class="active" href="license\politic.php">Политика конфиденциальности</a></li>  
-               <li class="caboo">CaBoo 2025 ©</li>
+                <li><a class="active" href="https://journal.tinkoff.ru/flows/career/">Статьи</a></li>
+                <li><a class="active" href="license\license.php">Лицензионное соглашение</a></li>
+                <li><a class="active" href="license\politic.php">Политика конфиденциальности</a></li>
+                <li><a class="active" href="feedback\feedback.php">Обратная связь</a></li>  
+                <li class="caboo">CaBoo 2025 ©</li>
            </ul>
         </div>
 
