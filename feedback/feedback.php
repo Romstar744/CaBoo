@@ -18,7 +18,7 @@ function getAuthLink($isLoggedIn) {
 $isLoggedIn = isUserLoggedIn();
 
 // Параметры для отправки письма (замените на свои)
-$admin_email = "romstar744@gmail.com"; // Ваш email
+$admin_email = "caboorus@gmail.com"; // Ваш email
 $subject = "Обратная связь с сайта CaBoo";
 
 $message_sent = false;

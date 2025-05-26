@@ -112,7 +112,7 @@ $isLoggedIn = isUserLoggedIn();
                     <strong>Контактные данные</strong>
                     <br>
                     Если у вас есть вопросы или комментарии относительно этой политики конфиденциальности, свяжитесь с нами по адресу:
-                    CaBoo@yandex.ru.
+                    caboorus@gmail.com.
                 </p>
             </div>
         </div>

@@ -4,6 +4,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+$log_file = 'registration.log';
+$log_message = date('Y-m-d H:i:s') . " - Registration attempt:\n" . print_r($_POST, true) . "\nErrors: " . print_r($errors, true) . "\n";
+file_put_contents($log_file, $log_message, FILE_APPEND);
+
 // Подключение к базе данных (замените на свои данные)
 $servername = "localhost";
 $username = "starostin_CaBoo";

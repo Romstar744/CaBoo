@@ -150,7 +150,7 @@ $isLoggedIn = isUserLoggedIn();
                     <strong>Контактные данные</strong>
                     <br>
                     Если у вас есть какие-либо вопросы относительно настоящего Соглашения, пожалуйста, свяжитесь с нами по адресу:
-                    CaBoo@yandex.ru.
+                    caboorus@gmail.com.
                 </p>
             </div>
         </div>
