@@ -79,17 +79,19 @@ $conn->close();
         <div class="profile-info">
             <section class="info-block">
                 <h2>Основная информация</h2>
-                <div class="form-group">
+               <div class="form-group">
                     <div class="form-row">
                         <label><i class="fas fa-user"></i> Логин:</label>
                         <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
                     </div>
+                    <div class="error-message" id="usernameError"></div>
                 </div>
                 <div class="form-group">
                     <div class="form-row">
                         <label><i class="fas fa-envelope"></i> Email:</label>
                         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
                     </div>
+                     <div class="error-message" id="emailError"></div>
                 </div>
             </section>
 
@@ -242,5 +244,22 @@ $conn->close();
     </form>
 </div>
 <script src="../js/profile.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error) {
+        const errorData = JSON.parse(decodeURIComponent(error));
+        for (const key in errorData) {
+            if (errorData.hasOwnProperty(key)) {
+                const errorField = document.getElementById(key + 'Error');
+                if (errorField) {
+                    errorField.textContent = errorData[key];
+                }
+            }
+        }
+    }
+});
+</script>
 </body>
 </html>

@@ -9,6 +9,15 @@ body {
     scroll-behavior: smooth;
 }
 
+.error-message {
+    color: #d32f2f;
+    text-align: left;
+    margin-top: 7px;
+    font-size: 1em;
+    font-weight: 600;
+    animation: shake 0.5s ease-in-out;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -20,7 +29,7 @@ body {
 }
 
 .profile-form {
-    max-width: 1200px;
+    max-width: 900px;
     width: 100%;
     background-color: #fff;
     border-radius: 25px;
@@ -108,7 +117,6 @@ body {
 }
 
 .form-row {
-    display: flex;
     align-items: center;
     margin-bottom: 15px;
 }

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -71,6 +71,36 @@ if (empty($email)) {
     $errors["email"] = "Пожалуйста, введите email.";
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors["email"] = "Неверный формат email.";
+}
+//Валидация email на Gmail
+if (!preg_match('/@gmail\.com$/', $email)) {
+    $errors["email"] = "Разрешена только Gmail почта.";
+}
+
+// Проверка, существует ли пользователь с таким логином (исключая текущего)
+$sql = "SELECT id FROM users WHERE username = ? AND id != ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("si", $username, $user_id);
+$stmt->execute();
+$stmt->store_result();
+$username_exists = $stmt->num_rows > 0;
+$stmt->close();
+
+// Проверка, существует ли пользователь с таким email (исключая текущего)
+$sql = "SELECT id FROM users WHERE email = ? AND id != ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("si", $email, $user_id);
+$stmt->execute();
+$stmt->store_result();
+$email_exists = $stmt->num_rows > 0;
+$stmt->close();
+
+if ($username_exists) {
+    $errors["username"] = "Логин уже занят.";
+}
+
+if ($email_exists) {
+    $errors["email"] = "Email уже зарегистрирован.";
 }
 
 if (!empty($errors)) {
