@@ -101,6 +101,21 @@ if ($role == 'employer') {
     }
 }
 
+// Проверка на уникальность названия компании
+if ($role == 'employer') {
+    $sql = "SELECT id FROM users WHERE company_name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $company_name);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $errors["company_name"] = "Компания с таким названием уже зарегистрирована.";
+    }
+
+    $stmt->close();
+}
+
 // Если есть ошибки, возвращаем на страницу регистрации
 if (!empty($errors)) {
     $encoded_errors = urlencode(json_encode($errors));

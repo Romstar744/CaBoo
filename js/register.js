@@ -45,10 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
         employerFields.style.display = employerRole.checked ? 'block' : 'none';
         companyNameInput.required = employerRole.checked;
         industryInput.required = employerRole.checked;
+
+        // Проверка доступности названия компании сразу после отображения полей
+        if (employerRole.checked) {
+            checkCompanyNameAvailability(companyNameInput.value);
+
+            companyNameInput.addEventListener('input', function () {
+                checkCompanyNameAvailability(this.value);
+            });
+        } else {
+            companyNameInput.removeEventListener('input', function () {
+                checkCompanyNameAvailability(this.value);
+            });
+            companyNameInput.value = '';
+            document.getElementById('companyNameError').textContent = '';
+            isCompanyNameValid = true;
+        }
     }
 
-    seekerRole.addEventListener('change', toggleEmployerFields);
-    employerRole.addEventListener('change', toggleEmployerFields);
+        seekerRole.addEventListener('change', function(){
+        toggleEmployerFields();
+        isCompanyNameValid = true; // Сбросить при переключении ролей
+    });
+
+    employerRole.addEventListener('change', function(){
+        toggleEmployerFields();
+         isCompanyNameValid = true; // Сбросить при переключении ролей
+    });
 
     // Инициализация при загрузке страницы
     toggleEmployerFields();
@@ -111,6 +134,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
+
+            // Проверка валидности названия компании перед отправкой формы
+                        // Проверка валидности названия компании перед отправкой формы
+            if (employerRole.checked && !isCompanyNameValid) {
+                isValid = false;
+                companyNameInput.classList.add('invalid');
+                const companyNameError = document.getElementById('companyNameError');
+                companyNameError.textContent = 'Пожалуйста, исправьте ошибки в названии компании.';
+            }
+
            // Проверка валидности пароля перед отправкой формы
             if (!isPasswordValid) {
                 isValid = false;
@@ -177,5 +210,29 @@ function checkEmailAvailability(email){
         })
         .catch(error => {
             emailError.textContent = 'Ошибка при проверке email.';
+        });
+}
+
+function checkCompanyNameAvailability(companyName) {
+    const companyNameError = document.getElementById('companyNameError');
+    if (companyName.trim() === '') {
+        companyNameError.textContent = 'Пожалуйста, введите название компании.';
+        isCompanyNameValid = false; // Название компании не валидно
+        return;
+    }
+    fetch(`../adm/check_company.php?company_name=${companyName}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.available === false) {
+                companyNameError.textContent = data.message;
+                isCompanyNameValid = false; // Название компании не валидно
+            } else {
+                companyNameError.textContent = '';
+                isCompanyNameValid = true; // Название компании валидно
+            }
+        })
+        .catch(error => {
+            companyNameError.textContent = 'Ошибка при проверке названия компании.';
+            isCompanyNameValid = false; // Название компании не валидно
         });
 }
