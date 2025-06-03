@@ -90,8 +90,92 @@ $conn->close();
                         <input type="text" value="<?php echo htmlspecialchars($jobseeker['last_name'] ?? 'Не указано'); ?>" readonly>
                     </div>
                 </div>
-                <!-- Другая информация о соискателе -->
+
+                 <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-city"></i> Город:</label>
+                        <input type="text" value="<?php echo htmlspecialchars($jobseeker['city'] ?? 'Не указано'); ?>" readonly>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-birthday-cake"></i> Дата рождения:</label>
+                        <input type="text" value="<?php echo htmlspecialchars($jobseeker['birthdate'] ?? 'Не указано'); ?>" readonly>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-venus-mars"></i> Пол:</label>
+                        <input type="text" value="<?php
+                        switch ($jobseeker['gender']) {
+                            case 'male': echo 'Мужской'; break;
+                            case 'female': echo 'Женский'; break;
+                            case 'other': echo 'Другой'; break;
+                            default: echo 'Не указано'; break;
+                        }
+                        ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-money-bill-wave"></i> Желаемая зарплата:</label>
+                        <input type="text" value="<?php echo htmlspecialchars($jobseeker['desired_salary'] ?? 'Не указано'); ?> ₽" readonly>
+                    </div>
+                </div>
+                 <div class="form-group">
+                        <div class="form-row">
+                            <label><i class="fas fa-tools"></i> Навыки:</label>
+                            <textarea readonly><?php echo htmlspecialchars($jobseeker['skills'] ?? 'Не указано'); ?></textarea>
+                        </div>
+                    </div>
+                 <div class="form-group">
+                        <div class="form-row">
+                          <label><i class="fas fa-comment-dots"></i> О себе:</label>
+                          <textarea  readonly><?php echo htmlspecialchars($jobseeker['about'] ?? 'Не указано'); ?></textarea>
+                        </div>
+                    </div>
+                 <div class="form-group">
+                    <div class="form-row">
+                        <label><i class="fas fa-share-alt"></i> Социальные сети:</label>
+                        <textarea readonly><?php echo htmlspecialchars($jobseeker['social_links'] ?? 'Не указано'); ?></textarea>
+                    </div>
+                </div>
+                <!-- Информация об образовании -->
                 <section class="info-block">
+                    <h2>Информация об образовании</h2>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label><i class="fas fa-graduation-cap"></i> Учебное заведение:</label>
+                            <input type="text" value="<?php echo htmlspecialchars($jobseeker['educationInstitution'] ?? 'Не указано'); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label><i class="fas fa-graduation-cap"></i> Степень:</label>
+                            <input type="text" value="<?php echo htmlspecialchars($jobseeker['educationDegree'] ?? 'Не указано'); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label><i class="fas fa-graduation-cap"></i> Начало обучения:</label>
+                            <input type="text" value="<?php echo htmlspecialchars($jobseeker['educationStart'] ?? 'Не указано'); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label><i class="fas fa-graduation-cap"></i> Окончание обучения:</label>
+                            <input type="text" value="<?php echo htmlspecialchars($jobseeker['educationEnd'] ?? 'Не указано'); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label><i class="fas fa-graduation-cap"></i> Описание:</label>
+                            <textarea readonly><?php echo htmlspecialchars($jobseeker['educationDescription'] ?? 'Не указано'); ?></textarea>
+                        </div>
+                    </div>
+                </section>
+                <br>
+            <section class="info-block">
     <h2>Результаты профориентационного тестирования</h2>
     <?php
     // Получаем результаты тестирования и рекомендации из базы данных
