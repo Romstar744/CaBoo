@@ -37,8 +37,10 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Войти</button>
-            <a href="../index.php" class="btn btn-secondary">На главную</a>
+            <div class="btn-container">
+                <a href="login_handler.php" class="btn btn-primary" onclick="document.forms[0].submit(); return false;">Войти</a>
+                <a href="../index.php" class="btn btn-secondary">На главную</a>
+            </div>
         </div>
         <a href="register.php" class="login-link">Нет аккаунта?</a>
     </form>

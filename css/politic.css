@@ -1,0 +1,30 @@
+/* Стили для страницы политики конфиденциальности */
+.politic-page {
+    padding: 50px 0;
+}
+
+.politic-agreement .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.politic-agreement h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #5e35b1;
+}
+
+.politic-agreement .agreement-text {
+    color: #757575;
+    line-height: 1.6;
+}
+
+.politic-agreement .agreement-text strong {
+    color: #4a4a4a;
+}
+
+/* Дополнительные стили, если необходимо */

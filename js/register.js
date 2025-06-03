@@ -19,7 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!emailInput.validity.valid) {
             emailError.textContent = 'Пожалуйста, введите корректный email.';
             emailInput.classList.add('invalid');
-        } else {
+        } else if (!/@gmail\.com$/.test(this.value)) { // Проверка gmail
+            emailError.textContent = 'Разрешена только Gmail почта.';
+            emailInput.classList.add('invalid');
+        }
+         else {
             checkEmailAvailability(this.value);
             emailInput.classList.remove('invalid');
         }
@@ -30,102 +34,89 @@ document.addEventListener('DOMContentLoaded', function() {
         checkUsernameAvailability(this.value);
     });
 
-    // Обработчик изменения аватара (для соискателя)
-    const avatarInput = document.getElementById('avatar');
-    const avatarPreview = document.getElementById('avatarPreview').querySelector('img');
-    if (avatarInput && avatarPreview) {
-        avatarInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    avatarPreview.src = e.target.result;
-                    avatarPreview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                avatarPreview.src = '#';
-                avatarPreview.style.display = 'none';
-            }
-        });
-    }
+     // Новая логика для отображения/скрытия полей и валидации
+    const employerFields = document.getElementById('employerFields');
+    const seekerRole = document.getElementById('seekerRole');
+    const employerRole = document.getElementById('employerRole');
+    const companyNameInput = document.getElementById('company_name');
+    const industryInput = document.getElementById('industry');
 
-    // Обработчик изменения логотипа компании (для работодателя)
-    const companyLogoInput = document.getElementById('companyLogo');
-    const companyLogoPreview = document.getElementById('companyLogoPreview').querySelector('img');
-    if (companyLogoInput && companyLogoPreview) {
-        companyLogoInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    companyLogoPreview.src = e.target.result;
-                    companyLogoPreview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                companyLogoPreview.src = '#';
-                companyLogoPreview.style.display = 'none';
-            }
-        });
-    }
+    function toggleEmployerFields() {
+        employerFields.style.display = employerRole.checked ? 'block' : 'none';
+        companyNameInput.required = employerRole.checked;
+        industryInput.required = employerRole.checked;
 
-    const roleSeekerRadio = document.getElementById('seekerRole');
-    const roleEmployerRadio = document.getElementById('employerRole');
-    const seekerFields = document.querySelector('.seeker-fields');
-    const employerFields = document.querySelector('.employer-fields');
+        // Проверка доступности названия компании сразу после отображения полей
+        if (employerRole.checked) {
+            checkCompanyNameAvailability(companyNameInput.value);
 
-    // Функция для отображения/скрытия полей в зависимости от выбранной роли
-    function toggleFields() {
-        if (roleSeekerRadio.checked) {
-            seekerFields.classList.add('active');
-            employerFields.classList.remove('active');
-        } else if (roleEmployerRadio.checked) {
-            seekerFields.classList.remove('active');
-            employerFields.classList.add('active');
+            companyNameInput.addEventListener('input', function () {
+                checkCompanyNameAvailability(this.value);
+            });
+        } else {
+            companyNameInput.removeEventListener('input', function () {
+                checkCompanyNameAvailability(this.value);
+            });
+            companyNameInput.value = '';
+            document.getElementById('companyNameError').textContent = '';
+            isCompanyNameValid = true;
         }
     }
 
-    // Вызываем функцию toggleFields при загрузке страницы и при изменении выбранной роли
-    toggleFields();
-    roleSeekerRadio.addEventListener('change', toggleFields);
-    roleEmployerRadio.addEventListener('change', toggleFields);
+        seekerRole.addEventListener('change', function(){
+        toggleEmployerFields();
+        isCompanyNameValid = true; // Сбросить при переключении ролей
+    });
 
- // Устанавливаем значения по умолчанию для полей с датами
- const birthdateInput = document.getElementById('birthdate');
- const educationStartInput = document.getElementById('educationStart');
- const educationEndInput = document.getElementById('educationEnd');
+    employerRole.addEventListener('change', function(){
+        toggleEmployerFields();
+         isCompanyNameValid = true; // Сбросить при переключении ролей
+    });
 
- // Функция для получения текущей даты в формате YYYY-MM-DD
- function getDefaultDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  let month = today.getMonth() + 1; // Месяцы начинаются с 0
-  month = month < 10 ? '0' + month : month; // Добавляем 0, если месяц < 10
-  let day = today.getDate();
-  day = day < 10 ? '0' + day : day; // Добавляем 0, если день < 10
-  return `${year}-${month}-${day}`;
- }
+    // Инициализация при загрузке страницы
+    toggleEmployerFields();
 
- // Устанавливаем значения по умолчанию
- if (birthdateInput) {
-  birthdateInput.value = getDefaultDate();
- }
- if (educationStartInput) {
-  educationStartInput.value = '2000-01';  // Начало 2000 года
- }
+    //Валидация пароля
+    const passwordInput = document.getElementById('password');
+    let isPasswordValid = false; // Флаг для отслеживания валидности пароля
 
- if (educationEndInput) {
-  educationEndInput.value = '2004-01';  // Конец 2004 года
- }
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const passwordError = document.getElementById('passwordError');
+        let isValid = true;
 
-    // Фокус и прокрутка до первого невалидного поля при отправке
+        if (password.length < 8) {
+            passwordError.textContent = 'Пароль должен содержать не менее 8 символов.';
+            isValid = false;
+        } else if (!/[A-Z]/.test(password)) {
+            passwordError.textContent = 'Пароль должен содержать хотя бы одну заглавную букву.';
+            isValid = false;
+        } else if (!/[^a-zA-Z0-9\s]/.test(password)) {
+            passwordError.textContent = 'Пароль должен содержать хотя бы один спец. символ.';
+            isValid = false;
+        } else {
+            passwordError.textContent = '';
+        }
+
+        if (isValid) {
+            passwordInput.classList.remove('invalid');
+            passwordError.textContent = '';
+            isPasswordValid = true; // Пароль валиден
+        } else {
+            passwordInput.classList.add('invalid');
+            isPasswordValid = false; // Пароль невалиден
+        }
+    });
+
+    // Убираем класс invalid при фокусе на поле
+    passwordInput.addEventListener('focus', function() {
+        this.classList.remove('invalid');
+    });
+
     const registerForm = document.querySelector('.register-form');
     if(registerForm){
         registerForm.addEventListener('submit', function(event) {
             let isValid = true;
-
-            // Общая валидация для обязательных полей (логин, email, пароль)
             const requiredFields = registerForm.querySelectorAll('input[required]');
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
@@ -143,56 +134,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
-          // Валидация для соискателя
-          if (roleSeekerRadio.checked) {
-           const seekerInputs = seekerFields.querySelectorAll('input, textarea, select');
-           seekerInputs.forEach(input => {
-             // Проверяем, является ли поле обязательным ИЛИ было заполнено ранее
-            if ((input.required || input.value.trim() !== '') && !input.value.trim()) {
-             isValid = false;
-             input.classList.add('invalid');
-             const errorId = input.id + 'Error';
-             const errorElement = document.getElementById(errorId);
-             if (errorElement) {
-              errorElement.textContent = 'Пожалуйста, заполните это поле.';
-             }
-            } else {
-             input.classList.remove('invalid');
-             const errorId = input.id + 'Error';
-             const errorElement = document.getElementById(errorId);
-             if (errorElement) {
-              errorElement.textContent = '';
-             }
+
+            // Проверка валидности названия компании перед отправкой формы
+                        // Проверка валидности названия компании перед отправкой формы
+            if (employerRole.checked && !isCompanyNameValid) {
+                isValid = false;
+                companyNameInput.classList.add('invalid');
+                const companyNameError = document.getElementById('companyNameError');
+                companyNameError.textContent = 'Пожалуйста, исправьте ошибки в названии компании.';
             }
-           });
-          }
 
-          // Валидация для работодателя
-          if (roleEmployerRadio.checked) {
-           const employerInputs = employerFields.querySelectorAll('input, textarea, select');
-           employerInputs.forEach(input => {
-             // Проверяем, является ли поле обязательным ИЛИ было заполнено ранее
-             if ((input.required || input.value.trim() !== '') && !input.value.trim()) {
-              isValid = false;
-              input.classList.add('invalid');
-              const errorId = input.id + 'Error';
-              const errorElement = document.getElementById(errorId);
-              if (errorElement) {
-               errorElement.textContent = 'Пожалуйста, заполните это поле.';
-              }
-             } else {
-              input.classList.remove('invalid');
-              const errorId = input.id + 'Error';
-              const errorElement = document.getElementById(errorId);
-              if (errorElement) {
-               errorElement.textContent = '';
-              }
-             }
-           });
-          }
-
+           // Проверка валидности пароля перед отправкой формы
+            if (!isPasswordValid) {
+                isValid = false;
+                passwordInput.classList.add('invalid');
+                const passwordError = document.getElementById('passwordError');
+                passwordError.textContent = 'Пароль не соответствует требованиям.';
+            }
+             // Проверка email на gmail перед отправкой формы
+            const emailInput = document.getElementById('email');
+            if (!/@gmail\.com$/.test(emailInput.value)) {
+               isValid = false;
+               emailInput.classList.add('invalid');
+               const emailError = document.getElementById('emailError');
+               emailError.textContent = 'Разрешена только Gmail почта.';
+            }
             if (!isValid) {
-                event.preventDefault(); // Предотвращаем отправку
+                event.preventDefault();
                 alert('Пожалуйста, заполните все обязательные поля.');
                 const invalidFields = registerForm.querySelectorAll('.invalid');
                 if (invalidFields.length > 0) {
@@ -242,5 +210,29 @@ function checkEmailAvailability(email){
         })
         .catch(error => {
             emailError.textContent = 'Ошибка при проверке email.';
+        });
+}
+
+function checkCompanyNameAvailability(companyName) {
+    const companyNameError = document.getElementById('companyNameError');
+    if (companyName.trim() === '') {
+        companyNameError.textContent = 'Пожалуйста, введите название компании.';
+        isCompanyNameValid = false; // Название компании не валидно
+        return;
+    }
+    fetch(`../adm/check_company.php?company_name=${companyName}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.available === false) {
+                companyNameError.textContent = data.message;
+                isCompanyNameValid = false; // Название компании не валидно
+            } else {
+                companyNameError.textContent = '';
+                isCompanyNameValid = true; // Название компании валидно
+            }
+        })
+        .catch(error => {
+            companyNameError.textContent = 'Ошибка при проверке названия компании.';
+            isCompanyNameValid = false; // Название компании не валидно
         });
 }

@@ -1,0 +1,95 @@
+/* Стили для страницы обратной связи */
+.feedback-page {
+    padding: 50px 0;
+}
+
+.feedback-form .container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #5e35b1;
+}
+
+.feedback-form p {
+    text-align: center;
+    color: #757575;
+    margin-bottom: 30px;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 25px;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #616161;
+    font-weight: 500;
+}
+
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.feedback-form input[type="text"]:focus,
+.feedback-form input[type="email"]:focus,
+.feedback-form textarea:focus {
+    border-color: #9c27b0;
+    outline: none;
+}
+
+.feedback-form textarea {
+    resize: vertical;
+}
+
+.feedback-form button[type="submit"] {
+    background: linear-gradient(45deg, #9c27b0, #ba68c8);
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.feedback-form button[type="submit"]:hover {
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    text-align: center;
+}

@@ -113,11 +113,49 @@ body {
     outline: none;
 }
 
+.form-group {
+    margin-bottom: 35px;
+    animation: slideInLeft 0.6s ease-in-out;
+}
+
+.form-group label {
+    color: #777777;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid #d6dce2;
+    border-radius: 12px;
+    font-size: 1.1em;
+    color: #555555;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9fb;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: #7986cb;
+    box-shadow: 0 0 8px rgba(121, 134, 203, 0.3);
+    outline: none;
+}
+
+.btn-container {
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    align-items: stretch; /* Выравниваем элементы по вертикали */
+}
+
 .btn {
-    display: inline-block;
-    padding: 17px 37px; /* Больше отступ */
-    margin: 15px;
-    background: linear-gradient(45deg, #7986cb, #9fa8da); /* Приглушенный фиолетовый градиент */
+    padding: 17px 37px;
+    margin: 20px 0; /* Уменьшаем вертикальный отступ */
+    background: linear-gradient(45deg, #7986cb, #9fa8da);
     color: #fff;
     text-decoration: none;
     border-radius: 12px;
@@ -128,16 +166,17 @@ body {
     letter-spacing: 0.5px;
     border: none;
     cursor: pointer;
+    text-align: center;
+    display: block; /* Делаем ссылку блочным элементом */
 }
 
 .btn:hover {
-    background: linear-gradient(45deg, #5c6bc0, #7986cb); /* Более темный фиолетовый */
+    background: linear-gradient(45deg, #5c6bc0, #7986cb);
     transform: translateY(-3px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Умеренная тень */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
 }
-
 .btn-secondary {
-    background: linear-gradient(45deg, #90a4ae, #b0bec5); /* Серый градиент */
+    background: linear-gradient(45deg, #90a4ae, #b0bec5);
 }
 
 .btn-secondary:hover {

@@ -1,9 +1,12 @@
-
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
+
+$log_file = 'registration.log';
+$log_message = date('Y-m-d H:i:s') . " - Registration attempt:\n" . print_r($_POST, true) . "\nErrors: " . print_r($errors, true) . "\n";
+file_put_contents($log_file, $log_message, FILE_APPEND);
 
 // Подключение к базе данных (замените на свои данные)
 $servername = "localhost";
@@ -36,95 +39,81 @@ $email = validate($_POST["email"]);
 $password = $_POST["password"]; // Не валидируем пароль здесь, сделаем это позже
 $role = $_POST["role"];
 
-// Обработка данных соискателя или работодателя
-$firstName = $lastName = $city = $companyName = $companyDescription = $about = $skills = $desiredSalary = $birthdate = $socialLinks = $resume = $gender = $industry = $educationInstitution = $educationDegree = $educationStart = $educationEnd = $educationDescription = null;
-
-if ($role === 'seeker') {
-    $firstName = validate($_POST["firstName"]);
-    $lastName = validate($_POST["lastName"]);
-    $city = validate($_POST["city"]);
-    $about = validate($_POST["about"]);
-    $skills = validate($_POST["skills"]);
-    $desiredSalary = validate($_POST["desired_salary"]);
-    $birthdate = validate($_POST["birthdate"]);
-    $socialLinks = validate($_POST["social_links"]);
-    $gender = validate($_POST["gender"]);
-    $educationInstitution = validate($_POST["educationInstitution"]);
-    $educationDegree = validate($_POST["educationDegree"]);
-    $educationStart = validate($_POST["educationStart"]);
-    $educationEnd = validate($_POST["educationEnd"]);
-    $educationDescription = validate($_POST["educationDescription"]);
-
-    // Обработка загрузки резюме
-    if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
-        $resumePath = uploadFile($_FILES['resume'], '../resumes/');
-    }
-
-} elseif ($role === 'employer') {
-    $companyName = validate($_POST["companyName"]);
-    $companyDescription = validate($_POST["companyDescription"]);
-    $industry = validate($_POST["industry"]);
-}
-
-// Загрузка и обработка аватара и логотипа
-$avatarPath = null;
-$companyLogoPath = null;
-
-// Загрузка аватара (если выбран файл)
-if ($role === 'seeker' && isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-    $avatarPath = uploadFile($_FILES['avatar'], '../img/avatars/');
-}
-
-// Загрузка логотипа (если выбран файл)
-if ($role === 'employer' && isset($_FILES['companyLogo']) && $_FILES['companyLogo']['error'] === UPLOAD_ERR_OK) {
-    $companyLogoPath = uploadFile($_FILES['companyLogo'], '../img/company_logos/');
-}
-
-// Функция для загрузки файла
-function uploadFile($file, $destination) {
-    $uploadDir = $destination;
-    $fileName = basename($file["name"]);
-    $filePath = $uploadDir . uniqid() . "_" . $fileName;
-    $imageFileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-
-    // Проверка типа файла
-    $allowedExtensions = array("jpg", "jpeg", "png", "gif", "pdf", "doc", "docx");
-    if (!in_array($imageFileType, $allowedExtensions)) {
-        return null; // Неверный тип файла
-    }
-
-    // Перемещение файла
-    if (move_uploaded_file($file["tmp_name"], $filePath)) {
-        return $filePath;
-    } else {
-        return null; // Ошибка при загрузке файла
-    }
-}
-
 // Валидация данных
 $errors = [];
 
 if (strlen($password) < 8) {
     $errors["password"] = "Пароль должен быть не менее 8 символов.";
 }
-
+if (!preg_match('/[A-Z]/', $password)) {
+    $errors["password"] = "Пароль должен содержать хотя бы одну заглавную букву.";
+}
+if (!preg_match('/[^a-zA-Z0-9\s]/', $password)) {
+    $errors["password"] = "Пароль должен содержать хотя бы один спец. символ.";
+}
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors["email"] = "Неверный формат email.";
 }
+if (!preg_match('/@gmail\.com$/', $email)) {
+    $errors["email"] = "Разрешена только Gmail почта.";
+}
 
-// Проверка, существует ли пользователь с таким логином или email
-$stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-$stmt->bind_param("ss", $username, $email);
+
+// Проверка, существует ли пользователь с таким логином
+$sql = "SELECT id FROM users WHERE username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
 $stmt->execute();
-$result = $stmt->get_result();
+$stmt->store_result();
+$username_exists = $stmt->num_rows > 0;
+$stmt->close();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    if ($row && $row['username'] === $username) {
-        $errors["username"] = "Логин уже занят.";
-    } elseif ($row && $row['email'] === $email) {
-        $errors["email"] = "Email уже зарегистрирован.";
+// Проверка, существует ли пользователь с таким email
+$sql = "SELECT id FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+$email_exists = $stmt->num_rows > 0;
+$stmt->close();
+
+if ($username_exists) {
+    $errors["username"] = "Логин уже занят.";
+}
+
+if ($email_exists) {
+    $errors["email"] = "Email уже зарегистрирован.";
+}
+
+// Получаем и валидируем поля компании, если роль - работодатель
+$company_name = null;
+$industry = null;
+if ($role == 'employer') {
+    $company_name = validate($_POST["company_name"]);
+    $industry = validate($_POST["industry"]);
+
+    if (empty($company_name)) {
+        $errors["company_name"] = "Название компании обязательно для заполнения.";
     }
+
+    if (empty($industry)) {
+        $errors["industry"] = "Индустрия обязательна для заполнения.";
+    }
+}
+
+// Проверка на уникальность названия компании
+if ($role == 'employer') {
+    $sql = "SELECT id FROM users WHERE company_name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $company_name);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $errors["company_name"] = "Компания с таким названием уже зарегистрирована.";
+    }
+
+    $stmt->close();
 }
 
 // Если есть ошибки, возвращаем на страницу регистрации
@@ -141,9 +130,11 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 $token = generate_token();
 
 // SQL-запрос для добавления нового пользователя
-$sql = "INSERT INTO users (username, email, password, email_verification_token, is_email_verified, role, first_name, last_name, city, company_name, company_description, avatar, company_logo, about, skills, desired_salary, birthdate, social_links, resume, gender, industry, educationInstitution, educationDegree, educationStart, educationEnd, educationDescription) VALUES (?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+// Добавляем поля company_name и industry в запрос
+$sql = "INSERT INTO users (username, email, password, email_verification_token, is_email_verified, role, company_name, industry) VALUES (?, ?, ?, ?, 0, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssssssssssssssssssssss", $username, $email, $hashedPassword, $token, $role, $firstName, $lastName, $city, $companyName, $companyDescription, $avatarPath, $companyLogoPath, $about, $skills, $desiredSalary, $birthdate, $socialLinks, $resumePath, $gender, $industry, $educationInstitution, $educationDegree, $educationStart, $educationEnd, $educationDescription);
+// Привязываем параметры, включая company_name и industry
+$stmt->bind_param("sssssss", $username, $email, $hashedPassword, $token, $role, $company_name, $industry);
 
 if ($stmt->execute()) {
     $userId = $conn->insert_id; // Получаем ID нового пользователя
@@ -168,7 +159,7 @@ if ($stmt->execute()) {
 
     if ($mailSuccess) {
         // Перенаправляем на страницу логина с сообщением об успехе
-        header("Location: login.php?message=" . urlencode("На вашу почту отправлено письмо для подтверждения."));        
+        header("Location: login.php?message=" . urlencode("На вашу почту отправлено письмо для подтверждения."));
         exit();
     } else {
         // Если не удалось отправить письмо, выводим ошибку
@@ -181,4 +172,6 @@ if ($stmt->execute()) {
     header("Location: register.php?error=" . urlencode(json_encode($errors)));
     exit();
 }
+$stmt->close();
+$conn->close();
 ?>

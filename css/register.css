@@ -197,14 +197,17 @@ input[type="radio"] {
 }
 
 .button-group {
+    display: flex; /* Используем flexbox для выравнивания */
+    flex-direction: column; /* Располагаем элементы в колонку */
+    align-items: stretch; /* Растягиваем элементы по ширине */
     text-align: center;
     margin-top: 30px;
 }
 
 .btn {
-    display: inline-block;
+    display: block; /* Занимает всю ширину контейнера */
     padding: 17px 37px;
-    margin: 15px;
+    margin: 10px 0; /* Добавляем вертикальный отступ */
     background: linear-gradient(45deg, #9c27b0, #ba68c8);
     color: #fff;
     text-decoration: none;
@@ -216,6 +219,7 @@ input[type="radio"] {
     letter-spacing: 0.5px;
     border: none;
     cursor: pointer;
+    text-align: center; /* Выравниваем текст */
 }
 
 .btn:hover {
