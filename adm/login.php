@@ -29,7 +29,7 @@
         }
         ?>
         <div class="form-group">
-            <label for="username">Логин:</label>
+            <label for="username">Логин/Email:</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div class="form-group">

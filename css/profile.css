@@ -544,7 +544,3 @@ body {
     text-decoration: none;
     transition: color 0.3s ease;
 }
-
-.profile-info a:hover {
-    color: #5e35b1;
-}
