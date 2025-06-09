@@ -136,7 +136,7 @@ $conn->close();
                 <div class="form-group">
                     <div class="form-row">
                         <label><i class="fas fa-money-bill-wave"></i> Желаемая зарплата:</label>
-                        <input type="number" name="desired_salary" value="<?php echo htmlspecialchars($user['desired_salary'] ?? ''); ?>">
+                        <input type="number" name="desired_salary" value="<?php echo htmlspecialchars($user['desired_salary'] ?? ''); ?> ₽">
                     </div>
                 </div>
                  <div class="form-group">
