@@ -363,21 +363,63 @@ body {
 }
 
 .jobseeker-list {
-    margin-top: 20px;
+    margin-top: 30px; /* Добавим отступ сверху */
 }
 
 .jobseeker-item {
-    border: 1px solid #ddd;
-    padding: 10px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #e0e0e0; /* Легкая рамка */
+}
+
+.jobseeker-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+}
+
+.jobseeker-item h3 {
+    display: contents;
+    color: #7b1fa2; /* Фиолетовый цвет, как в заголовках */
+    font-size: 1.6em;
     margin-bottom: 10px;
-    border-radius: 5px;
+    font-weight: 600;
 }
 
 .jobseeker-item p {
+    color: #555;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    /* Добавим ellipsis, чтобы текст не выходил за пределы */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 200px; /* Задайте максимальную ширину */
+}
+
+.jobseeker-item a {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #9c27b0, #ba68c8); /* Соответствует кнопкам */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px; /* Отступ сверху */
+}
+
+.jobseeker-item a:hover {
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Управление вакансиями */
@@ -525,6 +567,16 @@ body {
     }
 }
 
+/* Медиа-запрос для адаптивности */
+@media (max-width: 768px) {
+    .jobseeker-item h3 {
+        font-size: 1.4em;
+    }
+    .jobseeker-item p {
+        font-size: 1em;
+    }
+}
+
 /* Дополнительные стили */
 .info-block p {
     font-size: 1.1em;
@@ -540,7 +592,6 @@ body {
 }
 
 .profile-info a {
-    color: #7b1fa2;
     text-decoration: none;
     transition: color 0.3s ease;
 }
