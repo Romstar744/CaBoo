@@ -38,7 +38,7 @@ $stmt->close();
 // Получаем список соискателей, прошедших тестирование (только для работодателей)
 $jobseekers = [];
 if ($user['role'] == 'employer') {
-    $sql = "SELECT id, username, first_name, last_name, proforientation_test_results, proforientation_recommendations FROM users WHERE role = 'seeker' AND proforientation_test_results IS NOT NULL";
+    $sql = "SELECT id, username, first_name, last_name, city, birthdate, desired_salary, proforientation_test_results, proforientation_recommendations FROM users WHERE role = 'seeker' AND proforientation_test_results IS NOT NULL";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -341,9 +341,10 @@ if ($user['role'] == 'employer') {
         <?php if (!empty($jobseekers)): ?>
             <?php foreach ($jobseekers as $jobseeker): ?>
                 <div class="jobseeker-item">
-                    <h3><?php echo htmlspecialchars($jobseeker['first_name'] . ' ' . $jobseeker['last_name'] . ' (' . $jobseeker['username'] . ')'); ?></h3>
-                    <p>Результаты тестирования: <?php echo htmlspecialchars(substr($jobseeker['proforientation_test_results'], 0, 100)) . '...'; ?></p>
-                    <p>Рекомендации: <?php echo htmlspecialchars(substr($jobseeker['proforientation_recommendations'], 0, 100)) . '...'; ?></p>
+                    <h3><?php echo htmlspecialchars($jobseeker['first_name'] . ' ' . $jobseeker['last_name'] . ' '); ?></h3>
+                    <p>Город: <?php echo htmlspecialchars($jobseeker['city'] ?? 'Не указано'); ?></p>
+                    <p>Дата рождения: <?php echo htmlspecialchars($jobseeker['birthdate'] ?? 'Не указано'); ?></p>
+                    <p>Желаемая зарплата: <?php echo htmlspecialchars($jobseeker['desired_salary'] ?? 'Не указано'); ?> ₽</p>
                     <a href="view_jobseeker.php?id=<?php echo htmlspecialchars($jobseeker['id']); ?>">Просмотреть профиль</a>
                 </div>
             <?php endforeach; ?>

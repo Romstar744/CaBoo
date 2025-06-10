@@ -68,12 +68,6 @@ $conn->close();
                 <h2>Основная информация</h2>
                 <div class="form-group">
                     <div class="form-row">
-                        <label><i class="fas fa-user"></i> Логин:</label>
-                        <input type="text" value="<?php echo htmlspecialchars($jobseeker['username']); ?>" readonly>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-row">
                         <label><i class="fas fa-envelope"></i> Email:</label>
                         <input type="email" value="<?php echo htmlspecialchars($jobseeker['email']); ?>" readonly>
                     </div>
