@@ -595,3 +595,38 @@ body {
     text-decoration: none;
     transition: color 0.3s ease;
 }
+
+/* Стили для кнопки "Избранное" */
+.favorite-btn {
+    background: none; /* Прозрачный фон */
+    border: none;
+    color: #f44336; /* Красный цвет */
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-left: 10px; /* Отступ от текста */
+    transition: color 0.3s ease;
+    display: inline-flex;       /*  Чтобы иконка и текст были рядом */
+    align-items: center;       /*  Выравнивание по вертикали */
+}
+
+.favorite-btn:hover {
+    color: #d32f2f; /* Более темный красный при наведении */
+}
+
+.favorite-btn:focus {
+    outline: none; /* Убираем обводку при фокусе */
+}
+
+.favorite-btn .fas.fa-heart-o {
+    color: #757575; /* Серый цвет для "не в избранном" */
+    margin-right: 5px; /*  Отступ между иконкой и текстом  */
+}
+
+.favorite-btn .fas.fa-heart {
+     margin-right: 5px; /*  Отступ между иконкой и текстом  */
+}
+
+.favorite-text {
+    font-size: 0.9em;    /*  Размер текста (можно настроить) */
+    /*  Другие стили текста (например, цвет, жирность) */
+}

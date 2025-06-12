@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -34,6 +34,28 @@ if ($result->num_rows == 1) {
     die("Пользователь не найден!");
 }
 $stmt->close();
+
+// Функция для проверки, находится ли вакансия в избранном у текущего пользователя
+function isVacancyFavorite($conn, $user_id, $vacancy_id) {
+    $sql = "SELECT COUNT(*) FROM favorites_vacancies WHERE user_id = ? AND vacancy_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $user_id, $vacancy_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count = $result->fetch_row()[0];
+    return $count > 0;
+}
+
+// Функция для проверки, находится ли соискатель в избранном у текущего работодателя
+function isJobseekerFavorite($conn, $employer_id, $jobseeker_id) {
+    $sql = "SELECT COUNT(*) FROM favorites_jobseekers WHERE employer_id = ? AND jobseeker_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $employer_id, $jobseeker_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count = $result->fetch_row()[0];
+    return $count > 0;
+}
 
 // Получаем список соискателей, прошедших тестирование (только для работодателей)
 $jobseekers = [];
@@ -301,6 +323,12 @@ if ($user['role'] == 'employer') {
                                 <p>Компания: <?= htmlspecialchars($vacancy['company_name']) ?></p>
                                 <p>Зарплата: <?= htmlspecialchars($vacancy['salary']) ?> ₽</p>
                                 <a href="view_vacancy.php?id=<?= $vacancy['id'] ?>" class="btn">Подробнее</a>
+                                    <button class="favorite-btn"
+                                            data-vacancy-id="<?= $vacancy['id'] ?>"
+                                            data-is-favorite="<?= isVacancyFavorite($conn, $user_id, $vacancy['id']) ? 'true' : 'false' ?>">
+                                        <i class="fas fa-heart<?= isVacancyFavorite($conn, $user_id, $vacancy['id']) ? '' : '-o' ?>"></i>
+                                        <span class="favorite-text"><?= isVacancyFavorite($conn, $user_id, $vacancy['id']) ? 'В избранном' : 'В избранное' ?></span>
+                                    </button>
                             </div>
                         <?php endwhile; ?>
                     </div>
@@ -346,6 +374,12 @@ if ($user['role'] == 'employer') {
                     <p>Дата рождения: <?php echo htmlspecialchars($jobseeker['birthdate'] ?? 'Не указано'); ?></p>
                     <p>Желаемая зарплата: <?php echo htmlspecialchars($jobseeker['desired_salary'] ?? 'Не указано'); ?> ₽</p>
                     <a href="view_jobseeker.php?id=<?php echo htmlspecialchars($jobseeker['id']); ?>">Просмотреть профиль</a>
+                    <button class="favorite-btn"
+                            data-jobseeker-id="<?= $jobseeker['id'] ?>"
+                            data-is-favorite="<?= isJobseekerFavorite($conn, $user_id, $jobseeker['id']) ? 'true' : 'false' ?>">
+                        <i class="fas fa-heart<?= isJobseekerFavorite($conn, $user_id, $jobseeker['id']) ? '' : '-o' ?>"></i>
+                        <span class="favorite-text"><?= isJobseekerFavorite($conn, $user_id, $jobseeker['id']) ? 'В избранном' : 'В избранное' ?></span>
+                    </button>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
