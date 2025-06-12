@@ -9,7 +9,7 @@ function isUserLoggedIn() {
 // Функция для получения ссылки на авторизацию/регистрацию
 function getAuthLink($isLoggedIn) {
     if ($isLoggedIn) {
-         return '<a href="adm/login.php" class="login-button">Личный кабинет</a>';
+         return '<a href="adm/profile.php" class="login-button">Личный кабинет</a>';
      } else {
          return '<a href="adm/login.php" class="login-button">Вход</a>';
      }
