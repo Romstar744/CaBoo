@@ -238,7 +238,7 @@ $conn->close();
         </div>
 
         <div style="text-align:center">
-            <button type="submit" class="btn">Сохранить изменения</button>
+            <a href="#" onclick="document.querySelector('form').submit(); return false;" class="btn">Сохранить изменения</a>
             <a href="profile.php" class="btn">Отменить</a>
         </div>
     </form>
