@@ -1,0 +1,159 @@
+/* Общие стили чата */
+.chat-container {
+    width: 80%;
+    max-width: 900px; /* Максимальная ширина, как у профиля */
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1); /* Тень, как у блоков в профиле */
+    padding: 30px;
+    font-family: 'Nunito', sans-serif;
+    color: #4a4a4a;
+}
+
+.chat-container h1 {
+    color: #7b1fa2; /* Фиолетовый, как заголовки в профиле */
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 4px solid #e0e0e0;
+    padding-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+/* Область сообщений */
+.messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Сообщения */
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    max-width: 70%; /* Чтобы длинные сообщения не занимали всю ширину */
+}
+
+.sent {
+    background-color: #dcf8c6; /* Зеленый, как в WhatsApp */
+    align-self: flex-end; /* Сообщения отправителя справа */
+}
+
+.received {
+    background-color: #f0f0f0; /* Светло-серый */
+    align-self: flex-start; /* Сообщения собеседника слева */
+}
+
+.sender {
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+
+.text {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.time {
+    font-size: 0.8em;
+    color: #777;
+    margin-left: 10px;
+}
+
+/* Форма отправки сообщений */
+form {
+    display: flex;
+    align-items: center;
+}
+
+textarea {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #bdbdbd;
+    border-radius: 12px;
+    font-size: 1.1em;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: none;
+    height: 50px; /* Ограничиваем высоту */
+    overflow: auto; /* Добавляем полосу прокрутки, если текст не помещается */
+}
+
+textarea:focus {
+    border-color: #9c27b0; /* Фиолетовый при фокусе */
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+    outline: none;
+}
+
+button {
+    padding: 15px 25px;
+    background: linear-gradient(45deg, #9c27b0, #ba68c8); /* Градиент, как кнопки в профиле */
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-left: 15px;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Ссылка "Вернуться в личный кабинет" */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #7b1fa2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #9c27b0;
+}
+
+/* Загрузка файлов */
+.file-upload-label {
+    background: none;
+    border: none;
+    color: #9c27b0; /* Фиолетовый цвет */
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.file-upload-label:hover {
+    color: #7b1fa2; /* Более темный фиолетовый */
+}
+
+.file-attachment {
+    margin-top: 10px;
+}
+
+.file-attachment a {
+    color: #2196f3;
+    text-decoration: none;
+}
+
+.file-attachment a:hover {
+    text-decoration: underline;
+}

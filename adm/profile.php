@@ -339,6 +339,35 @@ if ($user['role'] == 'employer') {
     <?php endif; ?>
 <?php endif; ?>
 
+<?php if ($user['role'] == 'seeker'): ?>
+    <section class="info-block">
+        <h2>Мои чаты</h2>
+        <?php
+        $sql = "SELECT c.id, u.username AS employer_username
+                FROM chats c
+                JOIN users u ON c.employer_id = u.id
+                WHERE c.seeker_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $chats = $stmt->get_result();
+
+        if ($chats->num_rows > 0): ?>
+            <ul>
+                <?php while ($chat = $chats->fetch_assoc()): ?>
+                    <li>
+                        <a href="chat.php?chat_id=<?php echo htmlspecialchars($chat['id']); ?>">
+                            Чат с работодателем: <?php echo htmlspecialchars($chat['employer_username']); ?>
+                        </a>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
+        <?php else: ?>
+            <p>У вас пока нет активных чатов.</p>
+        <?php endif; ?>
+    </section>
+<?php endif; ?>
+
 <?php if ($user['role'] == 'employer'): ?>
             <section class="info-block">
                 <h2>Информация о работодателе</h2>
@@ -380,6 +409,7 @@ if ($user['role'] == 'employer') {
                         <i class="fas fa-heart<?= isJobseekerFavorite($conn, $user_id, $jobseeker['id']) ? '' : '-o' ?>"></i>
                         <span class="favorite-text"><?= isJobseekerFavorite($conn, $user_id, $jobseeker['id']) ? 'В избранном' : 'В избранное' ?></span>
                     </button>
+                    <a href="start_chat.php?seeker_id=<?php echo htmlspecialchars($jobseeker['id']); ?>">Начать чат</a>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
